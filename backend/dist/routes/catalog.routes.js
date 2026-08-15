@@ -124,6 +124,7 @@ export async function registerCatalogRoutes(app) {
                 images: {
                     orderBy: [{ isPrimary: 'desc' }, { sortOrder: 'asc' }],
                 },
+                variants: true,
             },
         });
         return {
@@ -148,6 +149,8 @@ export async function registerCatalogRoutes(app) {
                 badge: product.featured ? 'bestseller' : undefined,
                 installment: undefined,
                 description: product.description,
+                colors: Array.from(new Set(product.variants.map(v => v.attributes?.Color).filter(Boolean))),
+                sizes: Array.from(new Set(product.variants.map(v => v.attributes?.Size).filter(Boolean))),
             })),
             meta: { total: products.length },
         };
@@ -206,8 +209,8 @@ export async function registerCatalogRoutes(app) {
                 installment: undefined,
                 description: product.description,
                 features: [],
-                colors: [],
-                sizes: product.variants.map(variant => variant.name),
+                colors: Array.from(new Set(product.variants.map(v => v.attributes?.Color).filter(Boolean))),
+                sizes: Array.from(new Set(product.variants.map(v => v.attributes?.Size).filter(Boolean))),
             },
         };
     });

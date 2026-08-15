@@ -1,5 +1,5 @@
 {
-  "name": "salman-marketplace",
+  "name": "xb-cloud-design-system",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -17,6 +17,7 @@
     "start:backend": "npm --prefix backend run start"
   },
   "dependencies": {
+    "lucide-react": "^1.31.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "recharts": "^3.10.1"
