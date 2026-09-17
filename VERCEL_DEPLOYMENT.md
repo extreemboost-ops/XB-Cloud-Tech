@@ -1,6 +1,6 @@
 # 📐 Vercel Deployment Guide
 
-This guide explains how to deploy the **Multivendor Marketplace** to [Vercel](https://vercel.com).
+This guide explains how to deploy the **XB CLoudtech Design System** to [Vercel](https://vercel.com).
 
 ---
 
@@ -8,7 +8,7 @@ This guide explains how to deploy the **Multivendor Marketplace** to [Vercel](ht
 
 1. Log in to your [Vercel Dashboard](https://vercel.com/dashboard).
 2. Click **Add New...** ➔ **Project**.
-3. Import your GitHub repository (`ss360marketing-creator/Multivendor-Marketplace`).
+3. Import your GitHub repository (`extreemboost-ops/XB-Cloud-Tech`).
 4. Framework Preset: Vercel will automatically detect **Vite**.
 5. Click **Deploy**.
    - Vercel will automatically build the React app and deploy it with SPA routing enabled via `vercel.json`.
