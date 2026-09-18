@@ -15,73 +15,7 @@ import {
   Clock, CheckCheck, Rocket, Target, HeartHandshake, Milestone
 } from 'lucide-react';
 
-// ── NAVBAR ────────────────────────────────────────────────────────────────────
-const Navbar = ({ setPage }: { setPage: (page: string) => void }) => {
-  const [mob, setMob] = useState(false);
-  return (
-    <nav className="bg-dark-base border-b border-neutral-900 sticky top-0 z-50">
-      <div className="max-w-[1200px] mx-auto px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-10">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => setPage('home')}>
-            <Cloud className="w-6 h-6 text-secondary" />
-            <span className="font-logo text-xl font-bold text-white tracking-tight">XB Cloud Tech</span>
-          </div>
-          <div className="hidden md:flex items-center gap-1">
-            {[['Services','services'],['Pricing','pricing'],['Case Studies','portfolio'],['About','about'],['Blog','blog']].map(([l,p]) => (
-              <button key={p} onClick={() => setPage(p)}
-                className={`px-4 py-2 text-sm font-medium transition-colors rounded-md ${p==='services'?'text-white bg-white/10':'text-neutral-300 hover:text-white hover:bg-white/5'}`}>{l}</button>
-            ))}
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <button onClick={() => setPage('contact')} className="hidden md:block text-sm font-medium text-neutral-300 hover:text-white">Contact Sales</button>
-          <button onClick={() => setPage('pricing')} className="px-4 py-2 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary/90">Get Started</button>
-          <button className="md:hidden text-white p-1" onClick={() => setMob(!mob)}><Menu className="w-5 h-5" /></button>
-        </div>
-      </div>
-      {mob && (
-        <div className="md:hidden max-w-[1200px] mx-auto px-6 pb-4 flex flex-col gap-1 border-t border-white/10 pt-4">
-          {['home','services','pricing','portfolio','about','blog','contact'].map(p => (
-            <button key={p} onClick={() => { setPage(p); setMob(false); }}
-              className="text-left capitalize px-3 py-2 text-neutral-300 hover:text-white text-sm font-medium rounded-md hover:bg-white/5">{p}</button>
-          ))}
-        </div>
-      )}
-    </nav>
-  );
-};
-
-const Footer = ({ setPage }: { setPage: (page: string) => void }) => (
-  <footer className="bg-dark-base border-t border-neutral-900 text-white">
-    <div className="max-w-[1200px] mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-5 gap-8">
-      <div className="col-span-2 space-y-4">
-        <div className="flex items-center gap-2">
-          <Cloud className="w-6 h-6 text-secondary" />
-          <span className="font-logo text-xl font-bold text-white tracking-tight">XB Cloud Tech</span>
-        </div>
-        <p className="text-sm text-neutral-400 max-w-xs">Full-spectrum cloud, software & IT solutions. From idea to infrastructure.</p>
-      </div>
-      {[
-        { title: 'Services', links: ['Custom Software','Web Development','Mobile Apps','Cloud Solutions','AI & Automation'] },
-        { title: 'Company', links: ['About Us','Careers','Blog','Case Studies','Contact'] },
-        { title: 'Legal', links: ['Privacy Policy','Terms of Service','SLA','GDPR'] },
-      ].map(col => (
-        <div key={col.title}>
-          <h5 className="font-semibold text-sm text-white mb-5">{col.title}</h5>
-          <ul className="space-y-3">
-            {col.links.map(l => <li key={l}><a href="#" className="text-sm text-neutral-400 hover:text-white transition-colors">{l}</a></li>)}
-          </ul>
-        </div>
-      ))}
-    </div>
-    <div className="border-t border-white/10">
-      <div className="max-w-[1200px] mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-3 text-sm text-neutral-500">
-        <p>© 2026 XB Cloud Tech, Inc. All rights reserved.</p>
-        <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-success"></span><span>All systems operational</span></div>
-      </div>
-    </div>
-  </footer>
-);
+import { useNavigate } from 'react-router-dom';
 
 // ── SERVICE CATALOGUE DATA ────────────────────────────────────────────────────
 const CATEGORIES = [
@@ -511,7 +445,7 @@ const ServiceDetailView = ({
 
   return (
     <div className="min-h-screen bg-light-base font-sans text-neutral-900 selection:bg-primary/20 flex flex-col">
-      <Navbar setPage={setPage} />
+
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="bg-dark-base text-white pt-16 pb-24 relative overflow-hidden">
@@ -722,13 +656,14 @@ const ServiceDetailView = ({
         </div>
       </section>
 
-      <Footer setPage={setPage} />
     </div>
   );
 };
 
 // ── MAIN SERVICES LISTING PAGE ────────────────────────────────────────────────
-const ServicesPage = ({ setPage }: { setPage: (page: string) => void }) => {
+const ServicesPage = () => {
+  const navigate = useNavigate();
+  const setPage = (p: string) => navigate(p === "home" ? "/" : "/" + p);
   const [active, setActive] = useState('software');
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [selectedService, setSelectedService] = useState<{ catId: string, svcIdx: number } | null>(null);
@@ -755,7 +690,7 @@ const ServicesPage = ({ setPage }: { setPage: (page: string) => void }) => {
 
   return (
     <div className="min-h-screen bg-light-base font-sans text-neutral-900 selection:bg-primary/20 flex flex-col">
-      <Navbar setPage={setPage} />
+
 
       {/* ── PAGE HEADER ─────────────────────────────────────── */}
       <header className="bg-dark-base text-white pt-20 pb-24 relative overflow-hidden">
@@ -943,18 +878,16 @@ const ServicesPage = ({ setPage }: { setPage: (page: string) => void }) => {
               <p className="text-white/80 text-lg">Get a detailed proposal within 48 hours — no commitment required.</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-              <button onClick={() => setPage('contact')} className="px-8 py-4 bg-white text-primary rounded-xl font-bold hover:bg-neutral-100 transition-all shadow-xl flex items-center gap-2">
+              <button onClick={() => navigate('/contact')} className="px-8 py-4 bg-white text-primary rounded-xl font-bold hover:bg-neutral-100 transition-all shadow-xl flex items-center gap-2">
                 Request a Proposal <ArrowRight className="w-5 h-5" />
               </button>
-              <button onClick={() => setPage('pricing')} className="px-8 py-4 bg-white/20 border border-white/30 text-white rounded-xl font-semibold hover:bg-white/30 transition-all">
+              <button onClick={() => navigate('/pricing')} className="px-8 py-4 bg-white/20 border border-white/30 text-white rounded-xl font-semibold hover:bg-white/30 transition-all">
                 View Pricing
               </button>
             </div>
           </div>
         </div>
       </section>
-
-      <Footer setPage={setPage} />
     </div>
   );
 };

@@ -1,63 +1,21 @@
 /* eslint-disable */
 // @ts-nocheck
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Cloud, ChevronDown, Menu, ChevronRight, Globe, Terminal,
   Briefcase, ArrowRight, Shield, Server, Zap, Database,
   CheckCircle2, Star, Users, TrendingUp, Award, Play, X
 } from 'lucide-react';
 
-const HomePage = ({ setPage }: { setPage: (page: string) => void }) => {
+const HomePage = () => {
+  const navigate = useNavigate();
+  const setPage = (p: string) => navigate(p === "home" ? "/" : "/" + p);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-light-base font-sans text-neutral-900 selection:bg-primary/20">
-
-      {/* ── NAVBAR ──────────────────────────────── */}
-      <nav className="bg-dark-base border-b border-neutral-900 px-6 py-4 sticky top-0 z-50">
-        <div className="max-w-[1200px] mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-10">
-            <div className="flex items-center gap-2 cursor-pointer" onClick={() => setPage('home')}>
-              <Cloud className="w-6 h-6 text-secondary" />
-              <span className="font-logo text-xl font-bold text-white tracking-tight">XB Cloud Tech</span>
-            </div>
-            <div className="hidden md:flex items-center gap-1">
-              {[
-                { label: 'Services', page: 'services' },
-                { label: 'Pricing', page: 'pricing' },
-                { label: 'Case Studies', page: 'portfolio' },
-                { label: 'About', page: 'about' },
-                { label: 'Blog', page: 'blog' },
-              ].map(item => (
-                <button key={item.page} onClick={() => setPage(item.page)}
-                  className="px-4 py-2 text-sm font-medium text-neutral-300 hover:text-white transition-colors rounded-md hover:bg-white/5">
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="flex items-center gap-4">
-            <button onClick={() => setPage('contact')} className="hidden md:block text-sm font-medium text-neutral-300 hover:text-white transition-colors">Contact Sales</button>
-            <button className="px-4 py-2 bg-primary text-white rounded-lg font-semibold text-sm transition-all hover:bg-primary/90 shadow-md">
-              Get Started Free
-            </button>
-            <button className="md:hidden text-white p-2" onClick={() => setMobileOpen(!mobileOpen)}>
-              <Menu className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-        {mobileOpen && (
-          <div className="md:hidden max-w-[1200px] mx-auto pt-4 pb-2 flex flex-col gap-2 border-t border-white/10 mt-4">
-            {['services','pricing','portfolio','about','blog','contact'].map(p => (
-              <button key={p} onClick={() => { setPage(p); setMobileOpen(false); }}
-                className="text-left capitalize px-3 py-2 text-neutral-300 hover:text-white text-sm font-medium rounded-md hover:bg-white/5 transition-colors">
-                {p}
-              </button>
-            ))}
-          </div>
-        )}
-      </nav>
+    <div className="bg-light-base font-sans text-neutral-900 selection:bg-primary/20">
 
       {/* ── HERO ────────────────────────────────── */}
       <section className="bg-dark-base text-white pt-24 pb-32 relative overflow-hidden">
@@ -81,7 +39,7 @@ const HomePage = ({ setPage }: { setPage: (page: string) => void }) => {
               Enterprise-grade cloud hosting, DevOps automation, and IT security solutions — all under one roof. Deliver faster, scale smarter, stay protected.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button onClick={() => setPage('pricing')} className="px-8 py-4 bg-primary text-white rounded-xl font-bold text-base transition-all hover:bg-primary/90 hover:shadow-2xl hover:shadow-primary/30 active:scale-95 flex items-center gap-2">
+              <button onClick={() => navigate('/pricing')} className="px-8 py-4 bg-primary text-white rounded-xl font-bold text-base transition-all hover:bg-primary/90 hover:shadow-2xl hover:shadow-primary/30 active:scale-95 flex items-center gap-2">
                 Start Free Trial <ArrowRight className="w-5 h-5" />
               </button>
               <button onClick={() => setVideoOpen(true)} className="px-8 py-4 bg-white/10 border border-white/20 text-white rounded-xl font-semibold text-base transition-all hover:bg-white/20 backdrop-blur-sm flex items-center gap-2">
@@ -297,54 +255,16 @@ const HomePage = ({ setPage }: { setPage: (page: string) => void }) => {
           <h2 className="text-[40px] font-bold text-white mb-6 leading-tight">Ready to modernize your infrastructure?</h2>
           <p className="text-neutral-400 text-lg mb-10 max-w-xl mx-auto">Join 500+ companies who trust XB Cloud Tech to keep their business online, secure, and growing.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onClick={() => setPage('pricing')} className="px-8 py-4 bg-primary text-white rounded-xl font-bold text-base hover:bg-primary/90 hover:shadow-2xl hover:shadow-primary/30 transition-all flex items-center gap-2 mx-auto sm:mx-0">
+            <button onClick={() => navigate('/pricing')} className="px-8 py-4 bg-primary text-white rounded-xl font-bold text-base hover:bg-primary/90 hover:shadow-2xl hover:shadow-primary/30 transition-all flex items-center gap-2 mx-auto sm:mx-0">
               Start Free Trial <ArrowRight className="w-5 h-5" />
             </button>
-            <button onClick={() => setPage('contact')} className="px-8 py-4 bg-white/10 border border-white/20 text-white rounded-xl font-semibold text-base hover:bg-white/20 transition-all backdrop-blur-sm mx-auto sm:mx-0">
+            <button onClick={() => navigate('/contact')} className="px-8 py-4 bg-white/10 border border-white/20 text-white rounded-xl font-semibold text-base hover:bg-white/20 transition-all backdrop-blur-sm mx-auto sm:mx-0">
               Talk to an Expert
             </button>
           </div>
         </div>
       </section>
 
-      {/* ── FOOTER ──────────────────────────────── */}
-      <footer className="bg-dark-base border-t border-neutral-900 text-white">
-        <div className="max-w-[1200px] mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-5 gap-8">
-          <div className="col-span-2 space-y-4">
-            <div className="flex items-center gap-2">
-              <Cloud className="w-6 h-6 text-secondary" />
-              <span className="font-logo text-xl font-bold text-white tracking-tight">XB Cloud Tech</span>
-            </div>
-            <p className="text-sm text-neutral-400 max-w-xs">Enterprise cloud infrastructure & IT solutions. Powering businesses at any scale since 2018.</p>
-            <div className="flex gap-3">
-              {['Twitter', 'LinkedIn', 'GitHub'].map(s => (
-                <a key={s} href="#" className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center text-xs font-bold text-neutral-400 hover:bg-primary hover:text-white transition-colors">{s[0]}</a>
-              ))}
-            </div>
-          </div>
-          {[
-            { title: 'Services', links: ['Cloud Hosting', 'Cybersecurity', 'DevOps', 'Backup & Recovery', 'Managed IT'] },
-            { title: 'Company', links: ['About Us', 'Careers', 'Blog', 'Case Studies', 'Contact'] },
-            { title: 'Legal', links: ['Privacy Policy', 'Terms of Service', 'SLA', 'GDPR'] },
-          ].map(col => (
-            <div key={col.title}>
-              <h5 className="font-semibold text-sm text-white mb-5">{col.title}</h5>
-              <ul className="space-y-3">
-                {col.links.map(link => <li key={link}><a href="#" className="text-sm text-neutral-400 hover:text-white transition-colors">{link}</a></li>)}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <div className="border-t border-white/10">
-          <div className="max-w-[1200px] mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-3 text-sm text-neutral-500">
-            <p>© 2026 XB Cloud Tech, Inc. All rights reserved.</p>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-success"></span>
-              <span>All systems operational</span>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

@@ -19,41 +19,9 @@ import {
   Terminal
 } from 'lucide-react';
 
-const App = () => {
+const AboutPage = () => {
   return (
     <div className="min-h-screen bg-light-base font-sans text-neutral-900 selection:bg-primary/20">
-      
-      {/* 1. Navbar */}
-      <nav className="bg-dark-base border-b border-neutral-900 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
-        <div className="flex items-center gap-8 container-custom w-full max-w-[1200px] mx-auto">
-          <div className="flex items-center justify-between w-full">
-            <div className="flex items-center gap-8">
-              <div className="flex items-center gap-2 cursor-pointer">
-                <Cloud className="w-6 h-6 text-secondary" />
-                <span className="font-logo text-xl font-bold text-white tracking-tight">XB Cloud Tech</span>
-              </div>
-              <div className="hidden md:flex items-center gap-1">
-                <a href="#" className="px-4 py-2 text-sm font-medium text-neutral-200 hover:text-white transition-colors flex items-center gap-1 rounded-md hover:bg-white/5">
-                  Products <ChevronDown className="w-4 h-4" />
-                </a>
-                <a href="#" className="px-4 py-2 text-sm font-medium text-neutral-200 hover:text-white transition-colors rounded-md hover:bg-white/5">Solutions</a>
-                <a href="#" className="px-4 py-2 text-sm font-medium text-neutral-200 hover:text-white transition-colors rounded-md hover:bg-white/5">Pricing</a>
-                <a href="#" className="px-4 py-2 text-sm font-medium text-white transition-colors rounded-md bg-white/10">Company</a>
-                <a href="#" className="px-4 py-2 text-sm font-medium text-neutral-200 hover:text-white transition-colors rounded-md hover:bg-white/5">Docs</a>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <a href="#" className="hidden md:block text-sm font-medium text-neutral-200 hover:text-white transition-colors">Sign In</a>
-              <button className="px-4 py-2 bg-primary text-white rounded-lg font-semibold text-sm transition-all hover:bg-primary/90 flex items-center gap-2">
-                Console
-              </button>
-              <button className="md:hidden text-white p-2">
-                <Menu className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
 
       {/* 2. Page Header */}
       <header className="bg-dark-base text-white pt-16 pb-24 relative overflow-hidden">
@@ -378,68 +346,8 @@ const App = () => {
         </div>
       </section>
 
-      {/* 10. Footer */}
-      <footer className="bg-dark-base text-white">
-        <div className="container-custom py-16 lg:py-20 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12">
-          <div className="col-span-2 lg:col-span-2 space-y-6">
-            <div className="flex items-center gap-2">
-              <Cloud className="w-6 h-6 text-secondary" />
-              <span className="font-logo text-xl font-bold text-white tracking-tight">XB Cloud Tech</span>
-            </div>
-            <p className="text-sm text-neutral-400 max-w-sm">
-              Building the foundation for the next generation of digital experiences. High-performance cloud infrastructure for modern teams.
-            </p>
-            <div className="flex items-center gap-4 text-neutral-400">
-              <a href="#" className="hover:text-white transition-colors"><Globe className="w-5 h-5" /></a>
-              <a href="#" className="hover:text-white transition-colors"><Terminal className="w-5 h-5" /></a>
-              <a href="#" className="hover:text-white transition-colors"><Briefcase className="w-5 h-5" /></a>
-            </div>
-          </div>
-          
-          <div>
-            <h5 className="font-semibold mb-6">Products</h5>
-            <ul className="space-y-4 text-sm text-neutral-400">
-              <li><a href="#" className="hover:text-white transition-colors">Compute</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Storage</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Networking</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Kubernetes</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h5 className="font-semibold mb-6">Developers</h5>
-            <ul className="space-y-4 text-sm text-neutral-400">
-              <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">API Reference</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">CLI Tool</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Status</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h5 className="font-semibold mb-6">Company</h5>
-            <ul className="space-y-4 text-sm text-neutral-400">
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-            </ul>
-          </div>
-        </div>
-        
-        <div className="border-t border-white/10 bg-black/20">
-          <div className="container-custom py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-neutral-500">
-            <p>© 2026 XB Cloud Tech. All rights reserved.</p>
-            <div className="flex gap-6">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            </div>
-          </div>
-        </div>
-      </footer>
-
     </div>
   );
 };
 
-export default App;
+export default AboutPage;
