@@ -1,6 +1,14 @@
 import React, { useState } from "react"
-import { Outlet, Link } from "react-router-dom"
+import { Outlet, NavLink } from "react-router-dom"
 import { Cloud, Menu, X } from "lucide-react"
+
+const navItems = [
+  { label: "Services", to: "/services" },
+  { label: "Pricing", to: "/pricing" },
+  { label: "Case Studies", to: "/portfolio" },
+  { label: "About", to: "/about" },
+  { label: "Blog", to: "/blog" },
+]
 
 export default function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -12,27 +20,27 @@ export default function Layout() {
       <nav className="bg-dark-base border-b border-neutral-900 px-6 py-4 sticky top-0 z-50">
         <div className="max-w-[1200px] mx-auto flex items-center justify-between">
           <div className="flex items-center gap-10">
-            <Link to="/" className="flex items-center gap-2 cursor-pointer">
+            <NavLink to="/" className="flex items-center gap-2 cursor-pointer">
               <Cloud className="w-6 h-6 text-secondary" />
               <span className="font-logo text-xl font-bold text-white tracking-tight">
                 XB Cloud Tech
               </span>
-            </Link>
+            </NavLink>
             <div className="hidden md:flex items-center gap-1">
-              {[
-                { label: "Services", to: "/services" },
-                { label: "Pricing", to: "/pricing" },
-                { label: "Case Studies", to: "/portfolio" },
-                { label: "About", to: "/about" },
-                { label: "Blog", to: "/blog" },
-              ].map((item) => (
-                <Link
+              {navItems.map((item) => (
+                <NavLink
                   key={item.to}
                   to={item.to}
-                  className="px-4 py-2 text-sm font-medium text-neutral-300 hover:text-white transition-colors rounded-md hover:bg-white/5"
+                  className={({ isActive }) =>
+                    `px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                      isActive
+                        ? "text-white bg-white/10"
+                        : "text-neutral-300 hover:text-white hover:bg-white/5"
+                    }`
+                  }
                 >
                   {item.label}
-                </Link>
+                </NavLink>
               ))}
             </div>
           </div>
@@ -52,29 +60,31 @@ export default function Layout() {
             <button
               className="md:hidden text-white p-2"
               onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
             >
-              <Menu className="w-5 h-5" />
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
+
+        {/* Mobile menu */}
         {mobileOpen && (
           <div className="md:hidden max-w-[1200px] mx-auto pt-4 pb-2 flex flex-col gap-2 border-t border-white/10 mt-4">
-            {[
-              { label: "Services", to: "/services" },
-              { label: "Pricing", to: "/pricing" },
-              { label: "Case Studies", to: "/portfolio" },
-              { label: "About", to: "/about" },
-              { label: "Blog", to: "/blog" },
-              { label: "Contact", to: "/contact" },
-            ].map((p) => (
-              <Link
+            {[...navItems, { label: "Contact", to: "/contact" }].map((p) => (
+              <NavLink
                 key={p.to}
                 to={p.to}
                 onClick={() => setMobileOpen(false)}
-                className="text-left px-3 py-2 text-neutral-300 hover:text-white text-sm font-medium rounded-md hover:bg-white/5 transition-colors"
+                className={({ isActive }) =>
+                  `text-left px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                    isActive
+                      ? "text-white bg-white/10"
+                      : "text-neutral-300 hover:text-white hover:bg-white/5"
+                  }`
+                }
               >
                 {p.label}
-              </Link>
+              </NavLink>
             ))}
           </div>
         )}
@@ -95,8 +105,7 @@ export default function Layout() {
               </span>
             </div>
             <p className="text-sm text-neutral-400 max-w-xs">
-              Enterprise cloud infrastructure & IT solutions. Powering
-              businesses at any scale since 2018.
+              Enterprise cloud infrastructure &amp; IT solutions. Powering businesses at any scale since 2018.
             </p>
             <div className="flex gap-3">
               {["Twitter", "LinkedIn", "GitHub"].map((s) => (
@@ -142,18 +151,16 @@ export default function Layout() {
             },
           ].map((col) => (
             <div key={col.title}>
-              <h5 className="font-semibold text-sm text-white mb-5">
-                {col.title}
-              </h5>
+              <h5 className="font-semibold text-sm text-white mb-5">{col.title}</h5>
               <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link.l}>
-                    <Link
+                    <NavLink
                       to={link.t}
                       className="text-sm text-neutral-400 hover:text-white transition-colors"
                     >
                       {link.l}
-                    </Link>
+                    </NavLink>
                   </li>
                 ))}
               </ul>
@@ -171,7 +178,7 @@ export default function Layout() {
         </div>
       </footer>
 
-      {/* Interactive Mock Modal */}
+      {/* Console Modal */}
       {consoleMockOpen && (
         <div
           className="fixed inset-0 bg-black/80 z-[9999] flex items-center justify-center p-6"
@@ -182,12 +189,9 @@ export default function Layout() {
             onClick={(e) => e.stopPropagation()}
           >
             <Cloud className="w-12 h-12 text-secondary mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-white mb-2">
-              XB Cloud Console
-            </h3>
+            <h3 className="text-xl font-bold text-white mb-2">XB Cloud Console</h3>
             <p className="text-sm text-neutral-400 mb-6">
-              This is a frontend demonstration. In production, this would
-              redirect to the authentication portal.
+              This is a frontend demonstration. In production, this would redirect to the authentication portal.
             </p>
             <button
               onClick={() => setConsoleMockOpen(false)}

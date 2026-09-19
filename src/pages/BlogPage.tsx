@@ -225,7 +225,7 @@ const BlogPage = () => {
           {activeFilter === "All" && (
             <div
               className="bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-sm hover:shadow-lg transition-all group cursor-pointer"
-              onClick={() => setPage("blog-detail")}
+              onClick={() => setPage("blog/detail")}
             >
               <div className="aspect-[2/1] overflow-hidden relative">
                 <img
@@ -283,7 +283,7 @@ const BlogPage = () => {
               <div
                 key={post.id}
                 className="bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-sm hover:shadow-lg transition-all group flex flex-col cursor-pointer"
-                onClick={() => setPage("blog-detail")}
+                onClick={() => setPage("blog/detail")}
               >
                 <div className="aspect-[16/9] overflow-hidden relative">
                   <img
@@ -341,7 +341,7 @@ const BlogPage = () => {
                 <div
                   key={idx}
                   className="group cursor-pointer"
-                  onClick={() => setPage("blog-detail")}
+                  onClick={() => setPage("blog/detail")}
                 >
                   <h5 className="font-semibold text-neutral-800 text-sm mb-2 group-hover:text-primary transition-colors leading-tight">
                     {post.title}
@@ -756,7 +756,7 @@ export const BlogPostDetailPage = () => {
               <div
                 key={idx}
                 className="group cursor-pointer bg-light-base rounded-2xl border border-neutral-200 hover:border-primary/50 hover:shadow-lg transition-all flex flex-col overflow-hidden"
-                onClick={() => setPage("blog-detail")}
+                onClick={() => setPage("blog/detail")}
               >
                 <div className="h-48 overflow-hidden relative">
                   <img

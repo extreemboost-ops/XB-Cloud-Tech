@@ -1,22 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import App from './App'
 import './index.css'
-import { CatalogProvider } from './state/catalog-store'
-import { MarketplaceProvider } from './state/marketplace-store'
-import { SessionProvider } from './state/session-store'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <SessionProvider>
-      <MarketplaceProvider>
-        <CatalogProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </CatalogProvider>
-      </MarketplaceProvider>
-    </SessionProvider>
+    <HashRouter>
+      <App />
+    </HashRouter>
   </React.StrictMode>,
 )

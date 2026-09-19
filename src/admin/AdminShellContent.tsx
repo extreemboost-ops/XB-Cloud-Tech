@@ -1,13 +1,8 @@
 import { Suspense, lazy, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import type { AdminSection } from './adminData'
-import type { View } from '../app/navigation'
-import { useSession } from '@/state/session-store'
 import AdminSidebar from './AdminSidebar'
 import AdminTopBar from './AdminTopBar'
-
-type Props = {
-  onExitAdmin: (v: View) => void
-}
 
 type NavItem = {
   section: AdminSection
@@ -91,124 +86,15 @@ function Placeholder({ title }: { title: string }) {
   )
 }
 
-export default function AdminShellContent({ onExitAdmin }: Props) {
-  const session = useSession()
+export default function AdminShellContent() {
+  const navigate = useNavigate()
   const [section, setSection] = useState<AdminSection>('dashboard')
   const [collapsed, setCollapsed] = useState(false)
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set(['Overview', 'Storefront', 'Catalog', 'Sales', 'Vendors', 'Marketing']))
   const [notifOpen, setNotifOpen] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loginError, setLoginError] = useState<string | null>(null)
-  const [loggingIn, setLoggingIn] = useState(false)
 
   const currentLabel = navGroups.flatMap(g => g.items).find(i => i.section === section)?.label ?? 'Dashboard'
   const PageComponent = sectionPages[section]
-
-  if (session.status === 'loading') {
-    return (
-      <div className="min-h-screen bg-[#F4F4F8] flex items-center justify-center px-6" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-        <div className="rounded-3xl border border-[#E2E2EC] bg-white px-6 py-5 shadow-[0_20px_80px_rgba(15,15,24,0.08)]">
-          <p className="text-sm font-semibold text-[#111118]">Restoring your admin session...</p>
-          <p className="mt-1 text-xs text-[#6B6B82]">Checking auth and permissions.</p>
-        </div>
-      </div>
-    )
-  }
-
-  if (session.status !== 'authenticated') {
-    return (
-      <div className="min-h-screen bg-[#F4F4F8] flex items-center justify-center px-6" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-        <div className="w-full max-w-md rounded-3xl border border-[#E2E2EC] bg-white p-8 shadow-[0_20px_80px_rgba(15,15,24,0.08)]">
-          <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#9B9BB8]">Admin Portal</p>
-          <h1 className="mt-3 text-3xl font-black text-[#111118]">Salman Marketplace Admin</h1>
-          <p className="mt-2 text-sm text-[#6B6B82]">
-            Enter your Super Admin credentials to access the marketplace control panel.
-          </p>
-
-          <form
-            className="mt-6 space-y-4"
-            onSubmit={async event => {
-              event.preventDefault()
-              setLoggingIn(true)
-              setLoginError(null)
-
-              const result = await session.signIn(email, password)
-              if (!result.ok) {
-                setLoginError(result.message ?? 'Unable to sign in. Please verify your email and password.')
-              }
-
-              setLoggingIn(false)
-            }}
-          >
-            <div className="space-y-2">
-              <label className="text-xs font-semibold uppercase tracking-wide text-[#6B6B82]">Email Address</label>
-              <input
-                value={email}
-                onChange={event => setEmail(event.target.value)}
-                className="w-full h-11 rounded-xl border border-[#E2E2EC] bg-[#F9F9FC] px-4 text-sm outline-none transition-colors focus:border-[#E8450A]"
-                placeholder="admin@salmanmarketplace.com"
-                type="email"
-                required
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-xs font-semibold uppercase tracking-wide text-[#6B6B82]">Password</label>
-              <input
-                value={password}
-                onChange={event => setPassword(event.target.value)}
-                className="w-full h-11 rounded-xl border border-[#E2E2EC] bg-[#F9F9FC] px-4 text-sm outline-none transition-colors focus:border-[#E8450A]"
-                placeholder="••••••••••••"
-                type="password"
-                required
-              />
-            </div>
-
-            {loginError && (
-              <div className="rounded-xl border border-[#FECACA] bg-[#FEF2F2] px-4 py-3 text-sm text-[#991B1B]">
-                {loginError}
-              </div>
-            )}
-
-            <div className="space-y-2 pt-1">
-              <button
-                type="submit"
-                disabled={loggingIn}
-                className="w-full rounded-xl bg-[#E8450A] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#C93A07] disabled:cursor-not-allowed disabled:opacity-70 shadow-lg shadow-[#E8450A]/20"
-              >
-                {loggingIn ? 'Signing in...' : 'Sign In'}
-              </button>
-
-              <button
-                type="button"
-                onClick={async () => {
-                  setEmail('admin@salmanmarketplace.com')
-                  setPassword('admin')
-                  setLoggingIn(true)
-                  setLoginError(null)
-                  const result = await session.signIn('admin@salmanmarketplace.com', 'admin')
-                  if (!result.ok) {
-                    setLoginError(result.message ?? 'Unable to sign in.')
-                  }
-                  setLoggingIn(false)
-                }}
-                className="w-full rounded-xl border border-[#E2E2EC] bg-[#F9F9FC] px-4 py-2.5 text-xs font-bold text-[#111118] transition-colors hover:bg-[#EEF2FF] hover:text-[#4338CA] flex items-center justify-center gap-2"
-              >
-                <span>⚡</span> Auto-fill Credentials (admin@salmanmarketplace.com / admin)
-              </button>
-            </div>
-          </form>
-
-          <div className="mt-5 rounded-2xl bg-[#0F0F18] p-4 text-white">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#8A8AA3]">Super Admin Logins</p>
-            <p className="mt-1 font-mono text-xs text-[#E8450A]">Email: <span className="text-white">admin@salmanmarketplace.com</span></p>
-            <p className="font-mono text-xs text-[#E8450A]">Password: <span className="text-white font-bold">admin</span></p>
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="flex h-screen bg-[#F4F4F8] overflow-hidden" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
@@ -227,20 +113,18 @@ export default function AdminShellContent({ onExitAdmin }: Props) {
           })
         }}
         onSelectSection={setSection}
-        onExitAdmin={() => onExitAdmin({ type: 'home' })}
+        onExitAdmin={() => navigate('/')}
       />
 
       <div className="flex-1 flex flex-col min-w-0">
         <AdminTopBar
           label={currentLabel}
-          userName={session.user?.fullName}
+          userName="Admin"
           notifOpen={notifOpen}
           onToggleNotif={() => setNotifOpen(v => !v)}
-          onPreviewStore={() => onExitAdmin({ type: 'home' })}
+          onPreviewStore={() => navigate('/')}
           onQuickAdd={() => {}}
-          onSignOut={() => {
-            void session.signOut()
-          }}
+          onSignOut={() => navigate('/')}
         />
         <main className="flex-1 overflow-y-auto">
           <Suspense fallback={<Placeholder title={`Loading ${currentLabel}`} />}>

@@ -40,6 +40,8 @@ const PricingPage = () => {
 
   const [currency, setCurrency] = useState<"USD" | "PKR">("USD")
 
+  const [isAnnual, setIsAnnual] = useState(false)
+
   const [activeFAQ, setActiveFAQ] = useState<number | null>(0)
 
   // Conversion rates (example)

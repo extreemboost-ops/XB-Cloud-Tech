@@ -196,7 +196,7 @@ const PortfolioPage = () => {
 
               <div>
                 <button
-                  onClick={() => setPage("portfolio-detail")}
+                  onClick={() => setPage("portfolio/detail")}
                   className="px-6 py-3 bg-white text-dark-base rounded-lg font-bold text-sm transition-all hover:bg-neutral-200 flex items-center gap-2"
                 >
                   Read the full story <ArrowRight className="w-4 h-4" />
@@ -238,7 +238,7 @@ const PortfolioPage = () => {
               <div
                 key={study.id}
                 className="bg-white rounded-2xl border border-neutral-200 shadow-sm hover:shadow-lg hover:border-primary/30 transition-all group overflow-hidden flex flex-col cursor-pointer"
-                onClick={() => setPage("portfolio-detail")}
+                onClick={() => setPage("portfolio/detail")}
               >
                 <div className="h-64 overflow-hidden relative">
                   <div className="absolute inset-0 bg-dark-base/20 group-hover:bg-transparent transition-colors z-10"></div>
@@ -603,7 +603,7 @@ export const PortfolioDetailPage = () => {
               <div
                 key={idx}
                 className="group cursor-pointer bg-light-base rounded-2xl p-8 border border-neutral-200 hover:border-primary/50 hover:shadow-lg transition-all flex flex-col"
-                onClick={() => setPage("portfolio-detail")}
+                onClick={() => setPage("portfolio/detail")}
               >
                 <div className="mb-4">
                   <span className="px-3 py-1 rounded-full bg-white border border-neutral-200 text-neutral-600 text-xs font-semibold uppercase tracking-wider">
