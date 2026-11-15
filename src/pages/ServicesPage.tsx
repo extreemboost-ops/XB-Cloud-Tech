@@ -2142,10 +2142,10 @@ const ServicesPage = () => {
           </div>
           <div className="flex flex-wrap gap-x-10 gap-y-4 mt-14 pt-10 border-t border-white/10">
             {[
-              ["10+", "Service Areas"],
-              ["500+", "Projects Delivered"],
-              ["120+", "Team Members"],
-              ["38", "Countries Served"],
+              ["6 Core", "Ready ERP Platforms"],
+              ["10+", "Engineering Capabilities"],
+              ["100%", "Source Code Ownership"],
+              ["Zero", "Vendor Lock-in"],
             ].map(([n, l]) => (
               <div key={l}>
                 <div className="text-2xl font-bold text-white">{n}</div>

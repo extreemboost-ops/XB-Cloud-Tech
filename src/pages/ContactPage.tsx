@@ -2,7 +2,8 @@
 
 // @ts-nocheck
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { useSearchParams } from "react-router-dom"
 
 import {
   Cloud,
@@ -27,6 +28,7 @@ import {
 // --- Contact Page ---
 
 const ContactPage = () => {
+  const [searchParams] = useSearchParams()
   const [activeFAQ, setActiveFAQ] = useState<number | null>(0)
 
   const [formState, setFormState] = useState<"idle" | "submitting" | "success">(
@@ -37,10 +39,17 @@ const ContactPage = () => {
     email: "",
     company: "",
     phone: "",
-    service: "sales",
+    service: searchParams.get("product") || "storex-erp",
     message: "",
   })
   const [formErrors, setFormErrors] = useState<Record<string, string>>({})
+
+  useEffect(() => {
+    const prod = searchParams.get("product")
+    if (prod) {
+      setFormData((prev) => ({ ...prev, service: prod }))
+    }
+  }, [searchParams])
 
   const faqs = [
     {
@@ -296,18 +305,45 @@ const ContactPage = () => {
                         id="service"
                         value={formData.service}
                         onChange={handleChange}
-                        className="peer w-full px-4 pt-6 pb-2 bg-light-base border border-neutral-200 rounded-xl text-neutral-900 focus:outline-none focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary transition-all appearance-none font-medium"
+                        className="peer w-full px-4 pt-6 pb-2 bg-light-base border border-neutral-200 rounded-xl text-neutral-900 focus:outline-none focus:bg-white focus:border-primary focus:ring-1 focus:ring-primary transition-all appearance-none font-medium text-sm"
                       >
-                        <option value="sales">
-                          Sales Inquiry & Enterprise Pricing
-                        </option>
-                        <option value="support">
-                          Technical Support (Requires Login)
-                        </option>
-                        <option value="partnership">
-                          Partnerships & Integrations
-                        </option>
-                        <option value="other">Other Inquiry</option>
+                        <optgroup label="Software Product Demonstrations">
+                          <option value="storex-erp">
+                            Demo: Storex ERP (Retail POS & Inventory)
+                          </option>
+                          <option value="purchoon-erp">
+                            Demo: Purchoon ERP (Grocery & Wholesale POS)
+                          </option>
+                          <option value="cambridgedesk">
+                            Demo: CambridgeDesk (School Management)
+                          </option>
+                          <option value="pharmacy-erp">
+                            Demo: Pharmacy ERP (Batch & Expiry POS)
+                          </option>
+                          <option value="industrial-erp">
+                            Demo: Industrial ERP (Manufacturing & BOM)
+                          </option>
+                          <option value="qistmarket-erp">
+                            Demo: Qistmarket ERP (Installment Ledger)
+                          </option>
+                        </optgroup>
+                        <optgroup label="Enterprise Engineering & Services">
+                          <option value="custom-software">
+                            Custom Software Engineering
+                          </option>
+                          <option value="enterprise-erp">
+                            Custom Enterprise ERP Development
+                          </option>
+                          <option value="saas-development">
+                            SaaS & Web Application Development
+                          </option>
+                          <option value="automation">
+                            Workflow Automation & System Integration
+                          </option>
+                          <option value="other">
+                            General Sales & Consultation
+                          </option>
+                        </optgroup>
                       </select>
                       <label
                         htmlFor="service"

@@ -44,12 +44,12 @@ const AboutPage = () => {
           </div>
 
           <h1 className="text-h1 mb-6 max-w-4xl mx-auto">
-            Powering Businesses with Reliable Cloud Infrastructure
+            Enterprise Software. Engineered for Business.
           </h1>
-          <p className="text-body-lg text-neutral-400 max-w-2xl mx-auto">
-            We are building the backbone of the modern internet. Our mission is
-            to democratize high-performance cloud infrastructure, making it
-            accessible, secure, and scalable for engineering teams worldwide.
+          <p className="text-body-lg text-neutral-300 max-w-3xl mx-auto">
+            XB Cloud Tech builds business software, industry-specific ERP
+            platforms, and custom digital systems that help organizations manage
+            operations, connect workflows, and scale with confidence.
           </p>
         </div>
       </header>

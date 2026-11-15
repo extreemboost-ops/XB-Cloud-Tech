@@ -1,0 +1,17 @@
+# Robots.txt for XB Cloud Tech
+# Website: https://xbcloudtech.com/
+
+User-agent: *
+Allow: /
+
+# Paid advertising campaign landing pages (PPC) are strictly excluded from organic indexing
+# to prevent duplicate content flags and keyword cannibalization with core product and service pages
+Disallow: /lp/
+Disallow: /lp/*
+
+# Exclude legacy administration routes
+Disallow: /admin/
+Disallow: /admin/*
+
+# XML Sitemap
+Sitemap: https://xbcloudtech.com/sitemap.xml
