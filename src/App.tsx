@@ -35,6 +35,28 @@ import IndustrialCampaign from "./pages/campaigns/IndustrialCampaign"
 import CustomEnterpriseCampaign from "./pages/campaigns/CustomEnterpriseCampaign"
 import CampaignRouter from "./pages/campaigns/CampaignRouter"
 
+// Master CMS & Visual Administration System
+import { AdminAuthProvider } from "./context/AdminAuthContext"
+import AdminProtectedRoute from "./components/admin/AdminProtectedRoute"
+import AdminLayout from "./components/admin/AdminLayout"
+import AdminLoginPage from "./pages/admin/AdminLoginPage"
+import AdminDashboardPage from "./pages/admin/AdminDashboardPage"
+import AdminPagesPage from "./pages/admin/AdminPagesPage"
+import VisualPageBuilderPage from "./pages/admin/VisualPageBuilderPage"
+import AdminProductsPage from "./pages/admin/AdminProductsPage"
+import AdminLandingPagesPage from "./pages/admin/AdminLandingPagesPage"
+import DesignSystemEditorPage from "./pages/admin/DesignSystemEditorPage"
+import AdminNavigationPage from "./pages/admin/AdminNavigationPage"
+import AdminFooterPage from "./pages/admin/AdminFooterPage"
+import AdminMediaPage from "./pages/admin/AdminMediaPage"
+import AdminBlogPage from "./pages/admin/AdminBlogPage"
+import AdminSeoPage from "./pages/admin/AdminSeoPage"
+import AdminFormsPage from "./pages/admin/AdminFormsPage"
+import AdminUsersPage from "./pages/admin/AdminUsersPage"
+import AdminActivityPage from "./pages/admin/AdminActivityPage"
+import AdminVersionsPage from "./pages/admin/AdminVersionsPage"
+import AdminSettingsPage from "./pages/admin/AdminSettingsPage"
+
 function NotFound() {
   return (
     <div className="min-h-screen bg-dark-base flex flex-col items-center justify-center text-white text-center px-6">
@@ -71,7 +93,7 @@ function NotFound() {
 
 export default function App() {
   return (
-    <>
+    <AdminAuthProvider>
       <SEOHead />
       <Routes>
         {/* Phase 5: Paid Advertising Campaign Landing Pages (Minimal distraction-free shell) */}
@@ -95,6 +117,37 @@ export default function App() {
           element={<CustomEnterpriseCampaign />}
         />
         <Route path="/lp/:slug" element={<CampaignRouter />} />
+
+        {/* Dedicated Admin Login */}
+        <Route path="/admin/login" element={<AdminLoginPage />} />
+
+        {/* Master Admin Panel & Visual CMS Suite (Protected) */}
+        <Route
+          path="/admin"
+          element={
+            <AdminProtectedRoute>
+              <AdminLayout />
+            </AdminProtectedRoute>
+          }
+        >
+          <Route index element={<Navigate to="/admin/dashboard" replace />} />
+          <Route path="dashboard" element={<AdminDashboardPage />} />
+          <Route path="pages" element={<AdminPagesPage />} />
+          <Route path="builder/:pageId" element={<VisualPageBuilderPage />} />
+          <Route path="products" element={<AdminProductsPage />} />
+          <Route path="landing-pages" element={<AdminLandingPagesPage />} />
+          <Route path="design-system" element={<DesignSystemEditorPage />} />
+          <Route path="navigation" element={<AdminNavigationPage />} />
+          <Route path="footer" element={<AdminFooterPage />} />
+          <Route path="media" element={<AdminMediaPage />} />
+          <Route path="blog" element={<AdminBlogPage />} />
+          <Route path="seo" element={<AdminSeoPage />} />
+          <Route path="forms" element={<AdminFormsPage />} />
+          <Route path="users" element={<AdminUsersPage />} />
+          <Route path="activity" element={<AdminActivityPage />} />
+          <Route path="versions" element={<AdminVersionsPage />} />
+          <Route path="settings" element={<AdminSettingsPage />} />
+        </Route>
 
         {/* XB Cloud Tech public site with Global Header & Footer */}
         <Route path="/" element={<Layout />}>
@@ -181,12 +234,9 @@ export default function App() {
           <Route path="terms-of-service" element={<TermsPage />} />
         </Route>
 
-        {/* Redirect legacy /admin to home */}
-        <Route path="/admin/*" element={<Navigate to="/" replace />} />
-
         {/* 404 Catch-All */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </AdminAuthProvider>
   )
 }
