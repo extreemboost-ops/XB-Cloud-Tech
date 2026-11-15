@@ -152,9 +152,9 @@ export const SEO_REGISTRY: Record<string, PageSEOMetadata> = {
   },
 
   "/products/purchoon-erp": {
-    title: "Purchoon ERP | Weight-Based POS for Grocery & Wholesale",
+    title: "Purchoon ERP | Grocery & Wholesale Management Software",
     description:
-      "Specialized grocery POS software with direct digital weighing scale sync, reverse price-to-weight calculation, loose commodity bori tracking, and Udhar ledgers.",
+      "Manage grocery and wholesale operations with Purchoon ERP. Simplify weight-based POS, inventory, customer and supplier ledgers, sales, and business records.",
     canonicalUrl: `${BASE_URL}/products/purchoon-erp`,
     ogType: "product",
     jsonLd: {
