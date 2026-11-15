@@ -239,29 +239,26 @@ const PricingPage = () => {
             <div className="flex items-center gap-3 bg-white/10 p-1.5 rounded-xl border border-white/10">
               <button
                 onClick={() => setIsAnnual(false)}
-                className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                  !isAnnual
-                    ? "bg-white text-neutral-900 shadow-sm"
-                    : "text-neutral-300 hover:text-white"
-                }`}
+                className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${!isAnnual
+                  ? "bg-white text-neutral-900 shadow-sm"
+                  : "text-neutral-300 hover:text-white"
+                  }`}
               >
                 Monthly
               </button>
               <button
                 onClick={() => setIsAnnual(true)}
-                className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${
-                  isAnnual
-                    ? "bg-white text-neutral-900 shadow-sm"
-                    : "text-neutral-300 hover:text-white"
-                }`}
+                className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${isAnnual
+                  ? "bg-white text-neutral-900 shadow-sm"
+                  : "text-neutral-300 hover:text-white"
+                  }`}
               >
                 Yearly
                 <span
-                  className={`px-2 py-0.5 rounded text-xs ${
-                    isAnnual
-                      ? "bg-success/20 text-success"
-                      : "bg-success/30 text-success-light"
-                  }`}
+                  className={`px-2 py-0.5 rounded text-xs ${isAnnual
+                    ? "bg-success/20 text-success"
+                    : "bg-success/30 text-success-light"
+                    }`}
                 >
                   Save 20%
                 </span>
@@ -272,21 +269,19 @@ const PricingPage = () => {
             <div className="flex items-center gap-2 bg-white/10 p-1.5 rounded-xl border border-white/10">
               <button
                 onClick={() => setCurrency("USD")}
-                className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all ${
-                  currency === "USD"
-                    ? "bg-primary text-white shadow-sm"
-                    : "text-neutral-300 hover:text-white"
-                }`}
+                className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all ${currency === "USD"
+                  ? "bg-primary text-white shadow-sm"
+                  : "text-neutral-300 hover:text-white"
+                  }`}
               >
                 USD
               </button>
               <button
                 onClick={() => setCurrency("PKR")}
-                className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all ${
-                  currency === "PKR"
-                    ? "bg-primary text-white shadow-sm"
-                    : "text-neutral-300 hover:text-white"
-                }`}
+                className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all ${currency === "PKR"
+                  ? "bg-primary text-white shadow-sm"
+                  : "text-neutral-300 hover:text-white"
+                  }`}
               >
                 PKR
               </button>
@@ -302,11 +297,10 @@ const PricingPage = () => {
             {tiers.map((tier, idx) => (
               <div
                 key={idx}
-                className={`rounded-2xl flex flex-col relative transition-all duration-300 ${
-                  tier.popular
-                    ? "bg-white border-2 border-primary shadow-2xl md:-translate-y-4"
-                    : "bg-white border border-neutral-200 shadow-md"
-                }`}
+                className={`rounded-2xl flex flex-col relative transition-all duration-300 ${tier.popular
+                  ? "bg-white border-2 border-primary shadow-2xl md:-translate-y-4"
+                  : "bg-white border border-neutral-200 shadow-md"
+                  }`}
               >
                 {tier.popular && (
                   <div className="absolute top-0 inset-x-0 flex justify-center -mt-3.5">
@@ -355,9 +349,8 @@ const PricingPage = () => {
                           <X className="w-5 h-5 text-neutral-300 shrink-0 mt-0.5" />
                         )}
                         <span
-                          className={`text-sm font-medium ${
-                            feat.inc ? "text-neutral-700" : "text-neutral-400"
-                          }`}
+                          className={`text-sm font-medium ${feat.inc ? "text-neutral-700" : "text-neutral-400"
+                            }`}
                         >
                           {feat.name}
                         </span>
@@ -366,11 +359,11 @@ const PricingPage = () => {
                   </ul>
 
                   <button
-                    className={`w-full px-5 py-3.5 rounded-lg font-semibold text-base transition-all flex items-center justify-center gap-2 ${
-                      tier.popular
-                        ? "bg-primary text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20"
-                        : "bg-neutral-100 text-neutral-900 hover:bg-neutral-200"
-                    }`}
+                    onClick={() => navigate("/contact")}
+                    className={`w-full px-5 py-3.5 rounded-lg font-semibold text-base transition-all flex items-center justify-center gap-2 cursor-pointer ${tier.popular
+                      ? "bg-primary text-white hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20"
+                      : "bg-neutral-100 text-neutral-900 hover:bg-neutral-200"
+                      }`}
                   >
                     Get Started
                   </button>
@@ -504,9 +497,8 @@ const PricingPage = () => {
                         {row.tiers?.map((val, tIdx) => (
                           <td
                             key={tIdx}
-                            className={`p-4 text-center ${
-                              tIdx === 1 ? "bg-primary/[0.02]" : ""
-                            }`}
+                            className={`p-4 text-center ${tIdx === 1 ? "bg-primary/[0.02]" : ""
+                              }`}
                           >
                             {typeof val === "boolean" ? (
                               val ? (
@@ -552,11 +544,10 @@ const PricingPage = () => {
                     {faq.q}
                   </span>
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${
-                      activeFAQ === idx
-                        ? "bg-primary/10 text-primary"
-                        : "bg-white border border-neutral-200 text-neutral-500"
-                    }`}
+                    className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${activeFAQ === idx
+                      ? "bg-primary/10 text-primary"
+                      : "bg-white border border-neutral-200 text-neutral-500"
+                      }`}
                   >
                     {activeFAQ === idx ? (
                       <Minus className="w-4 h-4" />
@@ -566,11 +557,10 @@ const PricingPage = () => {
                   </div>
                 </button>
                 <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    activeFAQ === idx
-                      ? "max-h-96 opacity-100"
-                      : "max-h-0 opacity-0"
-                  }`}
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${activeFAQ === idx
+                    ? "max-h-96 opacity-100"
+                    : "max-h-0 opacity-0"
+                    }`}
                 >
                   <div className="px-6 pb-6 pt-0 text-neutral-600 text-sm leading-relaxed border-t border-neutral-200 mt-2 pt-4 bg-white">
                     {faq.a}
@@ -596,7 +586,10 @@ const PricingPage = () => {
                 your exact needs.
               </p>
             </div>
-            <button className="whitespace-nowrap px-8 py-4 bg-white text-primary rounded-xl font-bold text-base transition-all hover:bg-neutral-100 hover:shadow-xl hover:shadow-white/10 active:scale-95 flex items-center gap-2">
+            <button
+              onClick={() => navigate("/contact")}
+              className="whitespace-nowrap px-8 py-4 bg-white text-primary rounded-xl font-bold text-base transition-all hover:bg-neutral-100 hover:shadow-xl hover:shadow-white/10 active:scale-95 flex items-center gap-2 cursor-pointer"
+            >
               Contact Sales <ArrowRight className="w-5 h-5" />
             </button>
           </div>

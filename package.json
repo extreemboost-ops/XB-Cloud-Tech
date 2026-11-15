@@ -5,16 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "cd backend && npm install && npm run build",
-    "start": "cd backend && npm run start",
-    "build:frontend": "vite build",
+    "build": "vite build",
     "preview": "vite preview",
-    "format": "oxfmt",
-    "dev:api": "npm --prefix backend run dev",
-    "build:api": "npm --prefix backend run build",
-    "build:backend": "npm --prefix backend run build",
-    "start:api": "npm --prefix backend run start",
-    "start:backend": "npm --prefix backend run start"
+    "typecheck": "tsc --noEmit",
+    "format": "oxfmt"
   },
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",

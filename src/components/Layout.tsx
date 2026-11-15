@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { Outlet, NavLink } from "react-router-dom"
 import { Cloud, Menu, X } from "lucide-react"
 
@@ -32,10 +32,9 @@ export default function Layout() {
                   key={item.to}
                   to={item.to}
                   className={({ isActive }) =>
-                    `px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                      isActive
-                        ? "text-white bg-white/10"
-                        : "text-neutral-300 hover:text-white hover:bg-white/5"
+                    `px-4 py-2 text-sm font-medium rounded-md transition-colors ${isActive
+                      ? "text-white bg-white/10"
+                      : "text-neutral-300 hover:text-white hover:bg-white/5"
                     }`
                   }
                 >
@@ -62,7 +61,11 @@ export default function Layout() {
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </button>
           </div>
         </div>
@@ -76,10 +79,9 @@ export default function Layout() {
                 to={p.to}
                 onClick={() => setMobileOpen(false)}
                 className={({ isActive }) =>
-                  `text-left px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                    isActive
-                      ? "text-white bg-white/10"
-                      : "text-neutral-300 hover:text-white hover:bg-white/5"
+                  `text-left px-3 py-2 text-sm font-medium rounded-md transition-colors ${isActive
+                    ? "text-white bg-white/10"
+                    : "text-neutral-300 hover:text-white hover:bg-white/5"
                   }`
                 }
               >
@@ -105,7 +107,8 @@ export default function Layout() {
               </span>
             </div>
             <p className="text-sm text-neutral-400 max-w-xs">
-              Enterprise cloud infrastructure &amp; IT solutions. Powering businesses at any scale since 2018.
+              Enterprise cloud infrastructure &amp; IT solutions. Powering
+              businesses at any scale since 2018.
             </p>
             <div className="flex gap-3">
               {["Twitter", "LinkedIn", "GitHub"].map((s) => (
@@ -151,7 +154,9 @@ export default function Layout() {
             },
           ].map((col) => (
             <div key={col.title}>
-              <h5 className="font-semibold text-sm text-white mb-5">{col.title}</h5>
+              <h5 className="font-semibold text-sm text-white mb-5">
+                {col.title}
+              </h5>
               <ul className="space-y-3">
                 {col.links.map((link) => (
                   <li key={link.l}>
@@ -189,9 +194,12 @@ export default function Layout() {
             onClick={(e) => e.stopPropagation()}
           >
             <Cloud className="w-12 h-12 text-secondary mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-white mb-2">XB Cloud Console</h3>
+            <h3 className="text-xl font-bold text-white mb-2">
+              XB Cloud Console
+            </h3>
             <p className="text-sm text-neutral-400 mb-6">
-              This is a frontend demonstration. In production, this would redirect to the authentication portal.
+              This is a frontend demonstration. In production, this would
+              redirect to the authentication portal.
             </p>
             <button
               onClick={() => setConsoleMockOpen(false)}

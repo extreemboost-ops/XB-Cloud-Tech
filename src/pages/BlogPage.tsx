@@ -28,39 +28,69 @@ import {
   Bookmark,
 } from "lucide-react"
 
-const NewsletterBanner = () => (
-  <section className="py-20 bg-dark-base relative overflow-hidden">
-    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/4"></div>
-    <div className="container-custom relative z-10">
-      <div className="bg-primary/10 border border-primary/20 rounded-3xl p-10 md:p-14 flex flex-col lg:flex-row items-center justify-between gap-10 backdrop-blur-sm">
-        <div className="text-center lg:text-left max-w-xl">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Subscribe to our newsletter
-          </h2>
-          <p className="text-neutral-300">
-            Get the latest cloud engineering tutorials, architecture guides, and
-            platform updates delivered straight to your inbox every two weeks.
-          </p>
-        </div>
-        <div className="w-full lg:w-auto flex-grow max-w-md">
-          <div className="flex flex-col sm:flex-row gap-3">
-            <input
-              type="email"
-              placeholder="Enter your work email"
-              className="flex-grow px-5 py-3.5 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:border-secondary transition-colors placeholder:text-neutral-400"
-            />
-            <button className="px-6 py-3.5 bg-primary text-white rounded-xl font-bold text-sm transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 whitespace-nowrap">
-              Subscribe
-            </button>
+const NewsletterBanner = () => {
+  const [email, setEmail] = useState("")
+  const [subscribed, setSubscribed] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) return
+    setSubscribed(true)
+  }
+
+  return (
+    <section className="py-20 bg-dark-base relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/4"></div>
+      <div className="container-custom relative z-10">
+        <div className="bg-primary/10 border border-primary/20 rounded-3xl p-10 md:p-14 flex flex-col lg:flex-row items-center justify-between gap-10 backdrop-blur-sm">
+          <div className="text-center lg:text-left max-w-xl">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Subscribe to our newsletter
+            </h2>
+            <p className="text-neutral-300">
+              Get the latest cloud engineering tutorials, architecture guides,
+              and platform updates delivered straight to your inbox every two
+              weeks.
+            </p>
           </div>
-          <p className="text-xs text-neutral-500 mt-3 text-center lg:text-left">
-            No spam. Unsubscribe at any time.
-          </p>
+          <div className="w-full lg:w-auto flex-grow max-w-md">
+            {subscribed ? (
+              <div className="p-4 bg-success/20 border border-success/40 rounded-xl text-white flex items-center gap-3">
+                <span className="w-2.5 h-2.5 rounded-full bg-success"></span>
+                <span>
+                  Thank you! You've been subscribed to engineering updates.
+                </span>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col sm:flex-row gap-3"
+              >
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your work email"
+                  required
+                  className="flex-grow px-5 py-3.5 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:border-secondary transition-colors placeholder:text-neutral-400"
+                />
+                <button
+                  type="submit"
+                  className="px-6 py-3.5 bg-primary text-white rounded-xl font-bold text-sm transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 whitespace-nowrap cursor-pointer"
+                >
+                  Subscribe
+                </button>
+              </form>
+            )}
+            <p className="text-xs text-neutral-500 mt-3 text-center lg:text-left">
+              No spam. Unsubscribe at any time.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-)
+    </section>
+  )
+}
 
 // --- Blog Listing Page ---
 

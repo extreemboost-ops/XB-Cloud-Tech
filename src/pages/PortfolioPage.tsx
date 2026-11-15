@@ -27,28 +27,37 @@ import {
   GraduationCap,
 } from "lucide-react"
 
-const CTABanner = () => (
-  <section className="py-24 bg-primary relative overflow-hidden">
-    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-overlay"></div>
-    <div className="container-custom relative z-10 text-center text-white">
-      <h2 className="text-h2 mb-6 max-w-2xl mx-auto">
-        Ready to be our next success story?
-      </h2>
-      <p className="text-body-lg text-white/80 mb-10 max-w-xl mx-auto">
-        Join industry leaders who have transformed their infrastructure and
-        reduced costs with XB Cloud Tech.
-      </p>
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <button className="w-full sm:w-auto px-8 py-3.5 bg-dark-base text-white rounded-lg font-semibold text-base transition-all hover:bg-black hover:shadow-lg hover:shadow-black/20 active:scale-95 flex items-center justify-center gap-2">
-          Start Building Free
-        </button>
-        <button className="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-white text-white rounded-lg font-semibold text-base transition-all hover:bg-white/10 active:scale-95 flex items-center justify-center gap-2">
-          Contact Engineering
-        </button>
+const CTABanner = () => {
+  const navigate = useNavigate()
+  return (
+    <section className="py-24 bg-primary relative overflow-hidden">
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-overlay"></div>
+      <div className="container-custom relative z-10 text-center text-white">
+        <h2 className="text-h2 mb-6 max-w-2xl mx-auto">
+          Ready to be our next success story?
+        </h2>
+        <p className="text-body-lg text-white/80 mb-10 max-w-xl mx-auto">
+          Join industry leaders who have transformed their infrastructure and
+          reduced costs with XB Cloud Tech.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onClick={() => navigate("/pricing")}
+            className="w-full sm:w-auto px-8 py-3.5 bg-dark-base text-white rounded-lg font-semibold text-base transition-all hover:bg-black hover:shadow-lg hover:shadow-black/20 active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+          >
+            Start Building Free
+          </button>
+          <button
+            onClick={() => navigate("/contact")}
+            className="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-white text-white rounded-lg font-semibold text-base transition-all hover:bg-white/10 active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+          >
+            Contact Engineering
+          </button>
+        </div>
       </div>
-    </div>
-  </section>
-)
+    </section>
+  )
+}
 
 // --- Case Studies Page ---
 
