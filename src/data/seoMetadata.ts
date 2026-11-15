@@ -172,9 +172,10 @@ export const SEO_REGISTRY: Record<string, PageSEOMetadata> = {
   },
 
   "/products/cambridgedesk": {
-    title: "CambridgeDesk | School Management & Academic ERP Platform",
+    title:
+      "CambridgeDesk School Management ERP | Academic & School Administration Software",
     description:
-      "Comprehensive school management system featuring automated 3-copy bank fee challans, Cambridge marksheet grading engine, absence SMS alerts, and parent portals.",
+      "Manage school academics, curriculum, examinations, students, attendance, fees, and administration with CambridgeDesk School Management ERP by XB Cloud Tech.",
     canonicalUrl: `${BASE_URL}/products/cambridgedesk`,
     ogType: "product",
     jsonLd: {

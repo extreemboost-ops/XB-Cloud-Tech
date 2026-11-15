@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom"
 import ProductPageTemplate from "../../components/ProductPageTemplate"
 import PurchoonPage from "./PurchoonPage"
+import CambridgeDeskPage from "./CambridgeDeskPage"
 import { PRODUCTS_DATA } from "../../data/products"
 import { AlertTriangle, ArrowRight } from "lucide-react"
 
@@ -31,6 +32,10 @@ export default function ProductDetailPage() {
 
   if (slug === "purchoon-erp") {
     return <PurchoonPage />
+  }
+
+  if (slug === "cambridgedesk") {
+    return <CambridgeDeskPage />
   }
 
   return <ProductPageTemplate product={product} />
