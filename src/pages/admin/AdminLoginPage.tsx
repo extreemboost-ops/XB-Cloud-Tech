@@ -21,8 +21,11 @@ export const AdminLoginPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
+  const rawDest = (location.state as any)?.from?.pathname
   const destination =
-    (location.state as any)?.from?.pathname || "/admin/dashboard"
+    !rawDest || rawDest === "/admin/login" || rawDest === "/admin"
+      ? "/admin/dashboard"
+      : rawDest
 
   // If already authenticated, redirect
   React.useEffect(() => {

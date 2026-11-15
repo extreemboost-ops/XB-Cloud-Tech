@@ -16,7 +16,7 @@ interface AdminAuthContextType {
   login: (
     email: string,
     password?: string,
-  ) => Promise<{ success: boolean error?: string }>
+  ) => Promise<{ success: boolean, error?: string }>
   logout: () => void
   quickLoginAsRole: (role: UserRole) => void
   checkPermission: (permission: keyof RolePermissions) => boolean
