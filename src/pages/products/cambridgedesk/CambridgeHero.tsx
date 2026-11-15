@@ -10,8 +10,29 @@ import {
   RotateCcw,
   BarChart3,
 } from "lucide-react"
+import ProductScreenshotFrame, {
+  ScreenshotSlot,
+} from "../../../components/ProductScreenshotFrame"
 
 export default function CambridgeHero() {
+  const [heroMode, setHeroMode] = useState<"screenshot" | "simulator">(
+    "screenshot",
+  )
+
+  const heroSlot: ScreenshotSlot = {
+    id: "cambridge-hero",
+    slotNumber: "01",
+    slotLabel: "Hero Master Screenshot",
+    title: "CambridgeDesk • School Management & Academic Console",
+    subtitle: "Executive Campus Telemetry & Terminal Overview",
+    dimensions: "1920 × 1080 (16:9 Full HD)",
+    src: "/images/products/cambridge-hero.svg",
+    altText: "CambridgeDesk School Management and Academic Executive Console",
+    caption:
+      "Original interface capture of CambridgeDesk executive console tracking student attendance, syllabus pacing, and tuition fee collection.",
+    category: "Academic Operations",
+  }
+
   const [animStep, setAnimStep] = useState<number>(0)
   const [isPlaying, setIsPlaying] = useState<boolean>(true)
 
@@ -130,215 +151,207 @@ export default function CambridgeHero() {
               {/* Outer decorative card glow */}
               <div className="absolute -inset-1.5 bg-gradient-to-r from-[#0B5FFF]/20 via-[#00D4FF]/20 to-[#0B5FFF]/10 rounded-2xl blur-xl opacity-75" />
 
-              {/* Main Window Frame */}
-              <div className="relative bg-[#0A0F1E] text-white rounded-2xl border border-slate-800 shadow-2xl overflow-hidden">
-                {/* Title Bar */}
-                <div className="px-4 py-3 bg-[#0d1428] border-b border-slate-800 flex items-center justify-between text-xs text-slate-400">
-                  <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
-                    <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
-                    <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
-                    <span className="ml-2 font-mono text-[11px] text-slate-300 font-semibold flex items-center gap-1.5">
-                      <GraduationCap className="w-3.5 h-3.5 text-[#00D4FF]" />
-                      CambridgeDesk v4.2 • Session 2026-2027 [Main Campus]
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800/60 font-mono text-[10px]">
-                      ACADEMIC TERM 1
-                    </span>
-                    <button
-                      onClick={() => setIsPlaying(!isPlaying)}
-                      className="p-1 hover:text-white transition-colors cursor-pointer"
-                      title={isPlaying ? "Pause simulation" : "Play simulation"}
-                    >
-                      {isPlaying ? (
-                        <RotateCcw className="w-3.5 h-3.5" />
-                      ) : (
-                        <Play className="w-3.5 h-3.5 text-emerald-400" />
-                      )}
-                    </button>
-                  </div>
-                </div>
-
-                {/* Dashboard Body */}
-                <div className="p-4 sm:p-5 space-y-4">
-                  {/* Top Stats Strip */}
-                  <div className="grid grid-cols-3 gap-2.5 text-center">
-                    <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
-                        Enrolled Students
-                      </span>
-                      <span className="text-sm font-bold text-white font-mono">
-                        1,286 Active
-                      </span>
+              <ProductScreenshotFrame
+                slot={heroSlot}
+                variant="hero"
+                fallbackUI={
+                  <div className="p-4 sm:p-5 space-y-4">
+                    {/* Top Stats Strip */}
+                    <div className="grid grid-cols-3 gap-2.5 text-center">
+                      <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
+                        <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
+                          Enrolled Students
+                        </span>
+                        <span className="text-sm font-bold text-white font-mono">
+                          1,286 Active
+                        </span>
+                      </div>
+                      <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
+                        <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
+                          Today's Attendance
+                        </span>
+                        <span className="text-sm font-bold text-emerald-400 font-mono">
+                          96.4% Present
+                        </span>
+                      </div>
+                      <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
+                        <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
+                          Bank Fee Clearance
+                        </span>
+                        <span className="text-sm font-bold text-[#00D4FF] font-mono">
+                          91.2% Paid
+                        </span>
+                      </div>
                     </div>
-                    <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
-                        Today's Attendance
-                      </span>
-                      <span className="text-sm font-bold text-emerald-400 font-mono">
-                        96.4% Present
-                      </span>
-                    </div>
-                    <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
-                        Bank Fee Clearance
-                      </span>
-                      <span className="text-sm font-bold text-[#00D4FF] font-mono">
-                        91.2% Paid
-                      </span>
-                    </div>
-                  </div>
 
-                  {/* Dynamic Interactive Stage Card */}
-                  <div className="bg-gradient-to-br from-slate-900 via-slate-900/95 to-[#0B5FFF]/15 border border-slate-700/80 rounded-xl p-4 space-y-3 relative overflow-hidden">
-                    {/* Header of Active Step */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-[#0B5FFF]/20 border border-[#0B5FFF]/40 flex items-center justify-center text-[#00D4FF]">
-                          {animStep === 0 && <BarChart3 className="w-4 h-4" />}
-                          {animStep === 1 && <Users className="w-4 h-4" />}
-                          {animStep === 2 && (
-                            <GraduationCap className="w-4 h-4" />
-                          )}
-                          {animStep === 3 && <FileText className="w-4 h-4" />}
-                        </div>
-                        <div>
-                          <div className="text-sm font-bold text-white">
-                            {animStep === 0 &&
-                              "Academic Term 1 Executive Health"}
-                            {animStep === 1 &&
-                              "Biometric Gate Sync & Attendance SMS"}
-                            {animStep === 2 &&
-                              "Examination Marksheet & Cambridge GPA"}
-                            {animStep === 3 &&
-                              "3-Copy Automated Bank Fee Challans"}
+                    {/* Dynamic Interactive Stage Card */}
+                    <div className="bg-gradient-to-br from-slate-900 via-slate-900/95 to-[#0B5FFF]/15 border border-slate-700/80 rounded-xl p-4 space-y-3 relative overflow-hidden">
+                      {/* Header of Active Step */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-lg bg-[#0B5FFF]/20 border border-[#0B5FFF]/40 flex items-center justify-center text-[#00D4FF]">
+                            {animStep === 0 && (
+                              <BarChart3 className="w-4 h-4" />
+                            )}
+                            {animStep === 1 && <Users className="w-4 h-4" />}
+                            {animStep === 2 && (
+                              <GraduationCap className="w-4 h-4" />
+                            )}
+                            {animStep === 3 && <FileText className="w-4 h-4" />}
                           </div>
-                          <span className="text-xs text-slate-400 font-mono">
-                            {animStep === 0 &&
-                              "Active Class: Grade 9, 10, O-Level & A-Level"}
-                            {animStep === 1 &&
-                              "Live GSM Gateway: 42 Absence SMS Dispatched"}
-                            {animStep === 2 &&
-                              "Grading Scheme: A*, A, B, C, D, E, U Thresholds"}
-                            {animStep === 3 &&
-                              "Verified Copies: Bank, School & Student Copy"}
-                          </span>
+                          <div>
+                            <div className="text-sm font-bold text-white">
+                              {animStep === 0 &&
+                                "Academic Term 1 Executive Health"}
+                              {animStep === 1 &&
+                                "Biometric Gate Sync & Attendance SMS"}
+                              {animStep === 2 &&
+                                "Examination Marksheet & Cambridge GPA"}
+                              {animStep === 3 &&
+                                "3-Copy Automated Bank Fee Challans"}
+                            </div>
+                            <span className="text-xs text-slate-400 font-mono">
+                              {animStep === 0 &&
+                                "Active Class: Grade 9, 10, O-Level & A-Level"}
+                              {animStep === 1 &&
+                                "Live GSM Gateway: 42 Absence SMS Dispatched"}
+                              {animStep === 2 &&
+                                "Grading Scheme: A*, A, B, C, D, E, U Thresholds"}
+                              {animStep === 3 &&
+                                "Verified Copies: Bank, School & Student Copy"}
+                            </span>
+                          </div>
                         </div>
+
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-950 text-[#00D4FF] border border-blue-800">
+                          {`Step ${animStep + 1} / 4`}
+                        </span>
                       </div>
 
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-950 text-[#00D4FF] border border-blue-800">
-                        {`Step ${animStep + 1} / 4`}
+                      {/* Step Visual Body */}
+                      <div className="bg-slate-950/80 rounded-lg p-3 border border-slate-800 text-[11px] font-mono">
+                        {animStep === 0 && (
+                          <div className="space-y-1.5 text-slate-300">
+                            <div className="flex justify-between">
+                              <span>Syllabus Coverage:</span>
+                              <span className="text-emerald-400 font-bold">
+                                Week 14 (88% Target Met)
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Timetable Clashes:</span>
+                              <span className="text-emerald-400 font-bold">
+                                0 Clashes Detected
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Next Term Exam:</span>
+                              <span className="text-[#00D4FF]">
+                                Mid-Term Series in 12 Days
+                              </span>
+                            </div>
+                          </div>
+                        )}
+
+                        {animStep === 1 && (
+                          <div className="space-y-1.5 text-slate-300">
+                            <div className="flex justify-between">
+                              <span>Turnstile Gate Check:</span>
+                              <span className="text-emerald-400">
+                                1,240 Swipes Logged (07:45 - 08:15)
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Unannounced Absentees:</span>
+                              <span className="text-amber-400 font-bold">
+                                46 Students Flagged
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Parent Absence Alert:</span>
+                              <span className="text-emerald-400 font-bold">
+                                SMS Sent at 08:30 AM
+                              </span>
+                            </div>
+                          </div>
+                        )}
+
+                        {animStep === 2 && (
+                          <div className="space-y-1.5 text-slate-300">
+                            <div className="flex justify-between">
+                              <span>Candidate Marksheet:</span>
+                              <span className="text-white font-bold">
+                                Hamza Tariq (O-Level Section A)
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Mathematics (Syllabus D):</span>
+                              <span className="text-emerald-400 font-bold">
+                                92 / 100 (Grade: A*)
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Physics (5054):</span>
+                              <span className="text-emerald-400 font-bold">
+                                86 / 100 (Grade: A)
+                              </span>
+                            </div>
+                          </div>
+                        )}
+
+                        {animStep === 3 && (
+                          <div className="space-y-1.5 text-slate-300">
+                            <div className="flex justify-between">
+                              <span>Batch Challan Run:</span>
+                              <span className="text-white">
+                                December 2026 Tuition Cycle
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Total Vouchers Generated:</span>
+                              <span className="text-[#00D4FF] font-bold">
+                                1,286 PDF Slips with Barcode
+                              </span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Bank Integration:</span>
+                              <span className="text-emerald-400 font-bold">
+                                Direct API / Bank Deposit Format
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Bottom Verification & Play/Pause Controls Bar */}
+                    <div className="flex items-center justify-between pt-1 border-t border-slate-800/80 text-[10px] font-mono text-slate-400">
+                      <span className="text-[#00D4FF]">
+                        SESSION 2026-2027 ACTIVE
                       </span>
-                    </div>
-
-                    {/* Step Visual Body */}
-                    <div className="bg-slate-950/80 rounded-lg p-3 border border-slate-800 text-[11px] font-mono">
-                      {animStep === 0 && (
-                        <div className="space-y-1.5 text-slate-300">
-                          <div className="flex justify-between">
-                            <span>Syllabus Coverage:</span>
-                            <span className="text-emerald-400 font-bold">
-                              Week 14 (88% Target Met)
-                            </span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Timetable Clashes:</span>
-                            <span className="text-emerald-400 font-bold">
-                              0 Clashes Detected
-                            </span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Next Term Exam:</span>
-                            <span className="text-[#00D4FF]">
-                              Mid-Term Series in 12 Days
-                            </span>
-                          </div>
-                        </div>
-                      )}
-
-                      {animStep === 1 && (
-                        <div className="space-y-1.5 text-slate-300">
-                          <div className="flex justify-between">
-                            <span>Turnstile Gate Check:</span>
-                            <span className="text-emerald-400">
-                              1,240 Swipes Logged (07:45 - 08:15)
-                            </span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Unannounced Absentees:</span>
-                            <span className="text-amber-400 font-bold">
-                              46 Students Flagged
-                            </span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Parent Absence Alert:</span>
-                            <span className="text-emerald-400 font-bold">
-                              SMS Sent at 08:30 AM
-                            </span>
-                          </div>
-                        </div>
-                      )}
-
-                      {animStep === 2 && (
-                        <div className="space-y-1.5 text-slate-300">
-                          <div className="flex justify-between">
-                            <span>Candidate Marksheet:</span>
-                            <span className="text-white font-bold">
-                              Hamza Tariq (O-Level Section A)
-                            </span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Mathematics (Syllabus D):</span>
-                            <span className="text-emerald-400 font-bold">
-                              92 / 100 (Grade: A*)
-                            </span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Physics (5054):</span>
-                            <span className="text-emerald-400 font-bold">
-                              86 / 100 (Grade: A)
-                            </span>
-                          </div>
-                        </div>
-                      )}
-
-                      {animStep === 3 && (
-                        <div className="space-y-1.5 text-slate-300">
-                          <div className="flex justify-between">
-                            <span>Batch Challan Run:</span>
-                            <span className="text-white">
-                              December 2026 Tuition Cycle
-                            </span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Total Vouchers Generated:</span>
-                            <span className="text-[#00D4FF] font-bold">
-                              1,286 PDF Slips with Barcode
-                            </span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Bank Integration:</span>
-                            <span className="text-emerald-400 font-bold">
-                              Direct API / Bank Deposit Format
-                            </span>
-                          </div>
-                        </div>
-                      )}
+                      <button
+                        type="button"
+                        onClick={() => setIsPlaying(!isPlaying)}
+                        className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 hover:text-white flex items-center gap-1 cursor-pointer"
+                      >
+                        {isPlaying ? (
+                          <RotateCcw className="w-3 h-3" />
+                        ) : (
+                          <Play className="w-3 h-3 text-emerald-400" />
+                        )}
+                        <span>
+                          {isPlaying ? "Pause Simulation" : "Play Simulation"}
+                        </span>
+                      </button>
                     </div>
                   </div>
-
-                  {/* Bottom Verification Label */}
-                  <div className="text-center pt-1">
-                    <span className="text-[10px] text-slate-500 font-mono">
-                      * Illustrative EdTech UI Preview • Based on CambridgeDesk
-                      Academic ERP Specification
-                    </span>
-                  </div>
-                </div>
-              </div>
+                }
+                interactiveToggle={{
+                  activeMode: heroMode,
+                  onToggle: setHeroMode,
+                  simulatorLabel: "Live Console Simulation",
+                }}
+              />
             </div>
           </div>
         </div>

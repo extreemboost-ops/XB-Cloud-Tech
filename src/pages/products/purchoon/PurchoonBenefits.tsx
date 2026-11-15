@@ -8,6 +8,7 @@ import {
   CheckCircle2,
   TrendingUp,
 } from "lucide-react"
+import ProductScreenshotFrame from "../../../components/ProductScreenshotFrame"
 
 export default function PurchoonBenefits() {
   const benefits = [
@@ -176,6 +177,40 @@ export default function PurchoonBenefits() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* ── SCREENSHOT SLOT 03: CUSTOMER UDHAR & SUPPLIER LEDGER ── */}
+        <div className="mt-14 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+            <div>
+              <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-[#0B5FFF] block">
+                Original Product Screenshot • Slot 03
+              </span>
+              <h3 className="text-xl font-bold text-[#0A0F1E]">
+                Purchoon ERP • Customer Udhar Khata & Supplier Account Ledger
+              </h3>
+            </div>
+            <span className="text-xs font-mono text-slate-500">
+              Admin Replaceable Slot • 1600 × 900 (16:9)
+            </span>
+          </div>
+          <ProductScreenshotFrame
+            slot={{
+              id: "purchoon-ledger",
+              slotNumber: "03",
+              slotLabel: "Customer Udhar & Supplier Ledger",
+              title: "Digital Udhar Khata, Credit Limits & WhatsApp Ledger",
+              subtitle: "Automated Customer Balance & Supplier Reconciliation",
+              dimensions: "1600 × 900 (16:9)",
+              src: "/images/products/purchoon-ledger.svg",
+              altText:
+                "Purchoon ERP Customer Udhar Khata and Running Balance Audit",
+              caption:
+                "Complete credit ledger replacing paper diaries with credit limits, customer payment history, and instant balance receipts.",
+              category: "Khata & Ledgers",
+            }}
+            variant="section"
+          />
         </div>
       </div>
     </section>

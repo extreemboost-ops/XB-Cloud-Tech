@@ -8,10 +8,31 @@ import {
   Receipt,
   Play,
   RotateCcw,
-  Store,
 } from "lucide-react"
+import ProductScreenshotFrame, {
+  ScreenshotSlot,
+} from "../../../components/ProductScreenshotFrame"
 
 export default function PurchoonHero() {
+  // Mode toggle: Screenshot vs Live Simulation
+  const [heroMode, setHeroMode] = useState<"screenshot" | "simulator">(
+    "screenshot",
+  )
+
+  const heroSlot: ScreenshotSlot = {
+    id: "purchoon-hero",
+    slotNumber: "01",
+    slotLabel: "Hero Master Screenshot",
+    title: "Purchoon ERP • Counter POS with RS232 Serial Scale Sync",
+    subtitle: "Grocery & Wholesale Point-of-Sale Terminal",
+    dimensions: "1920 × 1080 (16:9 Full HD)",
+    src: "/images/products/purchoon-hero.svg",
+    altText: "Purchoon ERP Counter POS with RS232 Serial Scale Sync",
+    caption:
+      "Original interface capture of Purchoon ERP counter terminal featuring real-time serial scale reading, dual loose + barcode cart, and reverse calculation.",
+    category: "Counter Operations",
+  }
+
   // Animated simulation state
   const [animStep, setAnimStep] = useState<number>(0)
   const [isPlaying, setIsPlaying] = useState<boolean>(true)
@@ -128,216 +149,206 @@ export default function PurchoonHero() {
             </div>
           </div>
 
-          {/* Right Column: Animated Product Dashboard Composition */}
+          {/* Right Column: Hero Original Screenshot Placeholder by Admin (Slot 01) */}
           <div className="lg:col-span-6">
             <div className="relative mx-auto max-w-lg lg:max-w-none">
               {/* Outer decorative card glow */}
               <div className="absolute -inset-1.5 bg-gradient-to-r from-[#0B5FFF]/20 via-[#00D4FF]/20 to-[#0B5FFF]/10 rounded-2xl blur-xl opacity-75" />
 
-              {/* Main Dashboard Window Frame */}
-              <div className="relative bg-[#0A0F1E] text-white rounded-2xl border border-slate-800 shadow-2xl overflow-hidden">
-                {/* Window Title Bar */}
-                <div className="px-4 py-3 bg-[#0d1428] border-b border-slate-800 flex items-center justify-between text-xs text-slate-400">
-                  <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
-                    <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
-                    <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
-                    <span className="ml-2 font-mono text-[11px] text-slate-300 font-semibold flex items-center gap-1.5">
-                      <Store className="w-3.5 h-3.5 text-[#00D4FF]" />
-                      Purchoon ERP v3.4 • Counter POS [Terminal 01]
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800/60 font-mono text-[10px]">
-                      Scale: CONNECTED (RS232)
-                    </span>
-                    <button
-                      onClick={() => setIsPlaying(!isPlaying)}
-                      className="p-1 hover:text-white transition-colors"
-                      title={isPlaying ? "Pause simulation" : "Play simulation"}
-                    >
-                      {isPlaying ? (
-                        <RotateCcw className="w-3.5 h-3.5" />
-                      ) : (
-                        <Play className="w-3.5 h-3.5 text-emerald-400" />
-                      )}
-                    </button>
-                  </div>
-                </div>
-
-                {/* Dashboard Body */}
-                <div className="p-4 sm:p-5 space-y-4">
-                  {/* Top Status Bar: Cashier & Quick Stats */}
-                  <div className="grid grid-cols-3 gap-2.5 text-center">
-                    <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
-                        Cash in Drawer
-                      </span>
-                      <span className="text-sm font-bold text-white font-mono">
-                        Rs. 48,250
-                      </span>
+              <ProductScreenshotFrame
+                slot={heroSlot}
+                variant="hero"
+                fallbackUI={
+                  <div className="p-4 sm:p-5 space-y-4">
+                    {/* Top Status Bar: Cashier & Quick Stats */}
+                    <div className="grid grid-cols-3 gap-2.5 text-center">
+                      <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
+                        <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
+                          Cash in Drawer
+                        </span>
+                        <span className="text-sm font-bold text-white font-mono">
+                          Rs. 48,250
+                        </span>
+                      </div>
+                      <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
+                        <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
+                          Today's Sales
+                        </span>
+                        <span className="text-sm font-bold text-[#00D4FF] font-mono">
+                          Rs. 132,600
+                        </span>
+                      </div>
+                      <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
+                        <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
+                          Open Udhar Balance
+                        </span>
+                        <span className="text-sm font-bold text-amber-400 font-mono">
+                          Rs. 89,400
+                        </span>
+                      </div>
                     </div>
-                    <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
-                        Today's Sales
-                      </span>
-                      <span className="text-sm font-bold text-[#00D4FF] font-mono">
-                        Rs. 132,600
-                      </span>
-                    </div>
-                    <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5">
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
-                        Open Udhar Balance
-                      </span>
-                      <span className="text-sm font-bold text-amber-400 font-mono">
-                        Rs. 89,400
-                      </span>
-                    </div>
-                  </div>
 
-                  {/* Active Weighed Transaction Box */}
-                  <div className="bg-gradient-to-br from-slate-900 via-slate-900/95 to-[#0B5FFF]/15 border border-slate-700/80 rounded-xl p-4 space-y-3 relative overflow-hidden">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-[#0B5FFF]/20 border border-[#0B5FFF]/40 flex items-center justify-center text-[#00D4FF]">
-                          <Scale className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-bold text-white flex items-center gap-2">
-                            <span>Basmati Super Kernal Rice</span>
-                            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">
-                              Loose Commodity
+                    {/* Active Weighed Transaction Box */}
+                    <div className="bg-gradient-to-br from-slate-900 via-slate-900/95 to-[#0B5FFF]/15 border border-slate-700/80 rounded-xl p-4 space-y-3 relative overflow-hidden">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-lg bg-[#0B5FFF]/20 border border-[#0B5FFF]/40 flex items-center justify-center text-[#00D4FF]">
+                            <Scale className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <div className="text-sm font-bold text-white flex items-center gap-2">
+                              <span>Basmati Super Kernal Rice</span>
+                              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">
+                                Loose Commodity
+                              </span>
+                            </div>
+                            <span className="text-xs text-slate-400">
+                              Rate: Rs. 320 / kg (Bori Lot: #PK-2026-B)
                             </span>
                           </div>
-                          <span className="text-xs text-slate-400">
-                            Rate: Rs. 320 / kg (Bori Lot: #PK-2026-B)
-                          </span>
+                        </div>
+
+                        {/* Live Scale Weight Dial */}
+                        <div className="text-right">
+                          <div className="text-[10px] text-slate-400 uppercase tracking-wider">
+                            Scale Weight
+                          </div>
+                          <div className="text-xl sm:text-2xl font-mono font-bold text-emerald-400">
+                            {animStep === 0 && "0.000 kg"}
+                            {animStep === 1 && "1.750 kg"}
+                            {animStep === 2 && "1.750 kg"}
+                            {animStep === 3 && "1.750 kg"}
+                          </div>
                         </div>
                       </div>
 
-                      {/* Live Scale Weight Dial */}
-                      <div className="text-right">
-                        <div className="text-[10px] text-slate-400 uppercase tracking-wider">
-                          Scale Weight
+                      {/* Step-by-step progress pill */}
+                      <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-xs">
+                        <div className="flex items-center gap-2">
+                          <span className="text-slate-400 font-mono text-[11px]">
+                            Calculation:
+                          </span>
+                          <span className="text-white font-mono font-semibold">
+                            {animStep === 0 && "Awaiting scale input..."}
+                            {animStep >= 1 && "1,750 grams × Rs. 320/kg = "}
+                            {animStep >= 2 && (
+                              <span className="text-[#00D4FF] font-bold">
+                                Rs. 560.00
+                              </span>
+                            )}
+                          </span>
                         </div>
-                        <div className="text-xl sm:text-2xl font-mono font-bold text-emerald-400">
-                          {animStep === 0 && "0.000 kg"}
-                          {animStep === 1 && "1.750 kg"}
-                          {animStep === 2 && "1.750 kg"}
-                          {animStep === 3 && "1.750 kg"}
-                        </div>
+                        <span className="text-[11px] font-mono text-slate-400">
+                          {animStep === 0 && "Step 1/4: Place on scale"}
+                          {animStep === 1 && "Step 2/4: Scale synced"}
+                          {animStep === 2 && "Step 3/4: Price locked"}
+                          {animStep === 3 && "Step 4/4: Receipt printed"}
+                        </span>
                       </div>
                     </div>
 
-                    {/* Step-by-step progress pill */}
-                    <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-xs">
-                      <div className="flex items-center gap-2">
-                        <span className="text-slate-400 font-mono text-[11px]">
-                          Calculation:
-                        </span>
-                        <span className="text-white font-mono font-semibold">
-                          {animStep === 0 && "Awaiting scale input..."}
-                          {animStep >= 1 && "1,750 grams × Rs. 320/kg = "}
+                    {/* Customer Udhar & Receipt Preview Card */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {/* Customer Ledger Snapshot */}
+                      <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-3 space-y-2">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="font-semibold text-slate-300">
+                            Customer Khata (#104)
+                          </span>
+                          <span className="text-[10px] text-slate-400">
+                            Verified
+                          </span>
+                        </div>
+                        <div className="text-xs font-bold text-white">
+                          Haji Aslam Grocers
+                        </div>
+                        <div className="space-y-1 font-mono text-[11px] text-slate-400">
+                          <div className="flex justify-between">
+                            <span>Previous Balance:</span>
+                            <span className="text-slate-200">Rs. 1,450</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>This Sale:</span>
+                            <span className="text-[#00D4FF]">
+                              +{animStep >= 2 ? "Rs. 560" : "Rs. 0"}
+                            </span>
+                          </div>
+                          <div className="flex justify-between border-t border-slate-800 pt-1 font-bold">
+                            <span className="text-slate-300">New Balance:</span>
+                            <span className="text-amber-400">
+                              {animStep >= 3 ? "Rs. 2,010" : "Rs. 1,450"}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Receipt Output Simulation */}
+                      <div className="bg-slate-950/90 border border-slate-800 rounded-xl p-3 space-y-1.5 font-mono text-[11px]">
+                        <div className="flex items-center justify-between text-slate-400 border-b border-slate-800 pb-1">
+                          <span className="flex items-center gap-1">
+                            <Receipt className="w-3 h-3 text-[#00D4FF]" />
+                            Receipt #1842
+                          </span>
+                          <span>
+                            {new Date().toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}
+                          </span>
+                        </div>
+                        <div className="text-slate-300 text-[10px] space-y-0.5">
+                          <div className="flex justify-between">
+                            <span>1x Sugar (Loose 1kg)</span>
+                            <span>Rs. 200</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>1x Dal Chana (500g)</span>
+                            <span>Rs. 130</span>
+                          </div>
                           {animStep >= 2 && (
-                            <span className="text-[#00D4FF] font-bold">
-                              Rs. 560.00
-                            </span>
+                            <div className="flex justify-between text-[#00D4FF] font-semibold">
+                              <span>1x Basmati Rice (1.75kg)</span>
+                              <span>Rs. 560</span>
+                            </div>
                           )}
-                        </span>
+                        </div>
+                        <div className="border-t border-dashed border-slate-700 pt-1 flex justify-between font-bold text-white text-xs">
+                          <span>TOTAL PAYABLE:</span>
+                          <span className="text-emerald-400">
+                            {animStep >= 2 ? "Rs. 890.00" : "Rs. 330.00"}
+                          </span>
+                        </div>
                       </div>
-                      <span className="text-[11px] font-mono text-slate-400">
-                        {animStep === 0 && "Step 1/4: Place on scale"}
-                        {animStep === 1 && "Step 2/4: Scale synced"}
-                        {animStep === 2 && "Step 3/4: Price locked"}
-                        {animStep === 3 && "Step 4/4: Receipt printed"}
+                    </div>
+
+                    {/* Bottom Controls Bar */}
+                    <div className="flex items-center justify-between pt-1 border-t border-slate-800/80 text-[10px] font-mono text-slate-400">
+                      <span className="text-[#00D4FF]">
+                        Scale: RS232 CONNECTED
                       </span>
-                    </div>
-                  </div>
-
-                  {/* Customer Udhar & Receipt Preview Card */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {/* Customer Ledger Snapshot */}
-                    <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-3 space-y-2">
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="font-semibold text-slate-300">
-                          Customer Khata (#104)
-                        </span>
-                        <span className="text-[10px] text-slate-400">
-                          Verified
-                        </span>
-                      </div>
-                      <div className="text-xs font-bold text-white">
-                        Haji Aslam Grocers
-                      </div>
-                      <div className="space-y-1 font-mono text-[11px] text-slate-400">
-                        <div className="flex justify-between">
-                          <span>Previous Balance:</span>
-                          <span className="text-slate-200">Rs. 1,450</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>This Sale:</span>
-                          <span className="text-[#00D4FF]">
-                            +{animStep >= 2 ? "Rs. 560" : "Rs. 0"}
-                          </span>
-                        </div>
-                        <div className="flex justify-between border-t border-slate-800 pt-1 font-bold">
-                          <span className="text-slate-300">New Balance:</span>
-                          <span className="text-amber-400">
-                            {animStep >= 3 ? "Rs. 2,010" : "Rs. 1,450"}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Receipt Output Simulation */}
-                    <div className="bg-slate-950/90 border border-slate-800 rounded-xl p-3 space-y-1.5 font-mono text-[11px]">
-                      <div className="flex items-center justify-between text-slate-400 border-b border-slate-800 pb-1">
-                        <span className="flex items-center gap-1">
-                          <Receipt className="w-3 h-3 text-[#00D4FF]" />
-                          Receipt #1842
-                        </span>
-                        <span>
-                          {new Date().toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                        </span>
-                      </div>
-                      <div className="text-slate-300 text-[10px] space-y-0.5">
-                        <div className="flex justify-between">
-                          <span>1x Sugar (Loose 1kg)</span>
-                          <span>Rs. 200</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span>1x Dal Chana (500g)</span>
-                          <span>Rs. 130</span>
-                        </div>
-                        {animStep >= 2 && (
-                          <div className="flex justify-between text-[#00D4FF] font-semibold">
-                            <span>1x Basmati Rice (1.75kg)</span>
-                            <span>Rs. 560</span>
-                          </div>
+                      <button
+                        type="button"
+                        onClick={() => setIsPlaying(!isPlaying)}
+                        className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 hover:text-white flex items-center gap-1 cursor-pointer"
+                      >
+                        {isPlaying ? (
+                          <RotateCcw className="w-3 h-3" />
+                        ) : (
+                          <Play className="w-3 h-3 text-emerald-400" />
                         )}
-                      </div>
-                      <div className="border-t border-dashed border-slate-700 pt-1 flex justify-between font-bold text-white text-xs">
-                        <span>TOTAL PAYABLE:</span>
-                        <span className="text-emerald-400">
-                          {animStep >= 2 ? "Rs. 890.00" : "Rs. 330.00"}
+                        <span>
+                          {isPlaying ? "Pause Simulation" : "Play Simulation"}
                         </span>
-                      </div>
+                      </button>
                     </div>
                   </div>
-
-                  {/* Bottom Verification Label */}
-                  <div className="text-center pt-1">
-                    <span className="text-[10px] text-slate-500 font-mono">
-                      * Illustrative Product UI Preview • Based on Purchoon ERP
-                      Desktop POS Specification
-                    </span>
-                  </div>
-                </div>
-              </div>
+                }
+                interactiveToggle={{
+                  activeMode: heroMode,
+                  onToggle: setHeroMode,
+                  simulatorLabel: "Live POS Simulation",
+                }}
+              />
             </div>
           </div>
         </div>

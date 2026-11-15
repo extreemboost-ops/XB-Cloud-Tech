@@ -9,6 +9,7 @@ import {
   GraduationCap,
   BarChart3,
 } from "lucide-react"
+import ProductScreenshotFrame from "../../../components/ProductScreenshotFrame"
 
 interface ScreenItem {
   id: string
@@ -384,6 +385,39 @@ export default function CambridgeInterfaceGallery() {
             </div>
           </div>
         )}
+        {/* ── SCREENSHOT SLOT 04: MULTI-CAMPUS DIRECTOR & PARENT PORTAL ── */}
+        <div className="mt-14 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+            <div>
+              <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-[#0B5FFF] block">
+                Original Product Screenshot • Slot 04
+              </span>
+              <h3 className="text-xl font-bold text-[#0A0F1E]">
+                CambridgeDesk • Multi-Campus Executive Director & Parent Portal
+              </h3>
+            </div>
+            <span className="text-xs font-mono text-slate-500">
+              Admin Replaceable Slot • 1200 × 800 (16:10)
+            </span>
+          </div>
+          <ProductScreenshotFrame
+            slot={{
+              id: "cambridge-director",
+              slotNumber: "04",
+              slotLabel: "Multi-Campus Console & Parent Portal",
+              title: "Executive Director Multi-Campus Overview & Parent App",
+              subtitle: "Cross-Campus Performance & Instant Attendance Push",
+              dimensions: "1200 × 800 (16:10)",
+              src: "/images/products/cambridge-director.svg",
+              altText:
+                "CambridgeDesk Multi-Campus Director Telemetry and Parent Portal",
+              caption:
+                "Central head-office command dashboard aggregating tuition collection, teacher workload, and parent mobile application communications.",
+              category: "Governance & Mobile",
+            }}
+            variant="section"
+          />
+        </div>
       </div>
     </section>
   )

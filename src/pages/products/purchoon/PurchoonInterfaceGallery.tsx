@@ -9,6 +9,7 @@ import {
   Truck,
   DollarSign,
 } from "lucide-react"
+import ProductScreenshotFrame from "../../../components/ProductScreenshotFrame"
 
 interface ScreenItem {
   id: string
@@ -510,6 +511,39 @@ export default function PurchoonInterfaceGallery() {
             </div>
           </div>
         )}
+        {/* ── SCREENSHOT SLOT 04: WHOLESALE BORI & WAREHOUSE ── */}
+        <div className="mt-14 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+            <div>
+              <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-[#0B5FFF] block">
+                Original Product Screenshot • Slot 04
+              </span>
+              <h3 className="text-xl font-bold text-[#0A0F1E]">
+                Purchoon ERP • Wholesale Bori Receiving & Warehouse Stacking
+              </h3>
+            </div>
+            <span className="text-xs font-mono text-slate-500">
+              Admin Replaceable Slot • 1600 × 900 (16:9)
+            </span>
+          </div>
+          <ProductScreenshotFrame
+            slot={{
+              id: "purchoon-wholesale",
+              slotNumber: "04",
+              slotLabel: "Wholesale Bori Receiving & Warehouse",
+              title: "50kg Sack Deduction, Driver Challans & Lot Averaging",
+              subtitle: "Bulk Grain Intake & Tare Weight Allowance",
+              dimensions: "1600 × 900 (16:9)",
+              src: "/images/products/purchoon-wholesale.svg",
+              altText:
+                "Purchoon ERP Wholesale Bori Goods Receiving and Warehouse Stacking",
+              caption:
+                "Wholesale receiving workflow managing truck weighbridge gross weights, tare sack deductions, and bulk-to-loose stock conversion.",
+              category: "Wholesale Operations",
+            }}
+            variant="section"
+          />
+        </div>
       </div>
     </section>
   )

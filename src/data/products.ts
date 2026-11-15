@@ -39,6 +39,19 @@ export interface ProductFAQ {
   answer: string
 }
 
+export interface ProductScreenshotSlot {
+  id: string
+  slotNumber: string
+  slotLabel: string
+  title: string
+  subtitle?: string
+  dimensions: string
+  src: string
+  altText: string
+  caption?: string
+  category?: string
+}
+
 export interface ProductData {
   id: string
   slug: string
@@ -73,6 +86,7 @@ export interface ProductData {
   differentiatorTitle: string
   differentiatorDesc: string
   differentiatorFeatures: string[]
+  screenshots?: ProductScreenshotSlot[]
 }
 
 export const PRODUCTS_DATA: Record<string, ProductData> = {
@@ -356,6 +370,60 @@ export const PRODUCTS_DATA: Record<string, ProductData> = {
       "Unified customer Khata ledger with automated SMS balance alerts",
       "Inter-branch stock transfer verification with transit tracking",
     ],
+    screenshots: [
+      {
+        id: "storex-hero",
+        slotNumber: "01",
+        slotLabel: "Hero Master Screenshot",
+        title: "Storex Point-of-Sale & Multi-Counter Command Hub",
+        subtitle: "Primary POS Register & Cashier Dashboard",
+        dimensions: "1920 × 1080 (16:9 Full HD)",
+        src: "/images/products/storex-hero.svg",
+        altText: "Storex ERP Multi-Counter Retail POS Terminal Interface",
+        caption:
+          "Original screenshot capture of Storex POS cashier terminal with high-velocity barcode scanning and multi-register sync.",
+        category: "Counter Operations",
+      },
+      {
+        id: "storex-operations",
+        slotNumber: "02",
+        slotLabel: "Inventory Matrix & Barcode Central",
+        title: "Matrix Stock Control, Barcode Generation & Transfers",
+        subtitle: "Multi-Warehouse Inventory & Reorder Intelligence",
+        dimensions: "1600 × 900 (16:9)",
+        src: "/images/products/storex-operations.svg",
+        altText: "Storex ERP Inventory Matrix and Low Stock Warning Console",
+        caption:
+          "Live stock valuation, warehouse bay mapping, and automated PO generation based on minimum reorder triggers.",
+        category: "Stock & Warehousing",
+      },
+      {
+        id: "storex-reports",
+        slotNumber: "03",
+        slotLabel: "Financial Auditing & P&L Console",
+        title: "Daily Cash Reconciliation, Margins & Tax Reports",
+        subtitle: "Audited Ledger & Cashier Shift Sign-off",
+        dimensions: "1600 × 900 (16:9)",
+        src: "/images/products/storex-reports.svg",
+        altText: "Storex ERP Profit & Loss and Daily Cash Drawer Audit",
+        caption:
+          "Granular revenue breakdown by counter register, category margins, and zero-discrepancy cashier shift reconciliation.",
+        category: "Finance & Auditing",
+      },
+      {
+        id: "storex-mobile",
+        slotNumber: "04",
+        slotLabel: "Mobile Portal & Multi-Store Dashboard",
+        title: "Storex Cloud Mobile Management & Branch Telemetry",
+        subtitle: "Real-Time Sales Feeds & Remote Price Push",
+        dimensions: "1200 × 800 (16:10)",
+        src: "/images/products/storex-mobile.svg",
+        altText: "Storex ERP Cloud Sync and Multi-Branch Mobile Console",
+        caption:
+          "Remote store analytics for retail business owners with live branch telemetry and instant price adjustments.",
+        category: "Cloud & Mobile",
+      },
+    ],
   },
 
   "purchoon-erp": {
@@ -637,6 +705,61 @@ export const PRODUCTS_DATA: Record<string, ProductData> = {
       "Instant price-to-weight reverse calculation hotkey",
       "Bulk bori-to-loose unpack stock conversion with shrinkage factor",
       "Complete customer Udhar khata with balance verification receipts",
+    ],
+    screenshots: [
+      {
+        id: "purchoon-hero",
+        slotNumber: "01",
+        slotLabel: "Hero Master Screenshot",
+        title: "Purchoon Point-of-Sale with Serial Scale Sync",
+        subtitle: "Counter POS Register with Live Scale Integration",
+        dimensions: "1920 × 1080 (16:9 Full HD)",
+        src: "/images/products/purchoon-hero.svg",
+        altText: "Purchoon ERP Counter POS with RS232 Serial Scale Sync",
+        caption:
+          "Original interface capture of Purchoon ERP counter terminal featuring real-time serial scale reading, dual loose + barcode cart, and reverse calculation.",
+        category: "Counter Operations",
+      },
+      {
+        id: "purchoon-pos",
+        slotNumber: "02",
+        slotLabel: "Loose-Item Calculator Terminal",
+        title: "Gram / Kg Precision Billing & Hybrid Cart Engine",
+        subtitle: "Reverse Price-to-Weight & Fast Commodity Entry",
+        dimensions: "1600 × 900 (16:9)",
+        src: "/images/products/purchoon-pos.svg",
+        altText: "Purchoon ERP Loose-Item Calculator and Fast Billing Terminal",
+        caption:
+          "High-speed billing interface supporting gram-level calculation, barcode item scanning, and instant customer ticket compilation.",
+        category: "POS & Billing",
+      },
+      {
+        id: "purchoon-ledger",
+        slotNumber: "03",
+        slotLabel: "Customer Udhar & Supplier Ledger",
+        title: "Digital Udhar Khata, Credit Limits & WhatsApp Ledger",
+        subtitle: "Automated Customer Balance & Supplier Reconciliation",
+        dimensions: "1600 × 900 (16:9)",
+        src: "/images/products/purchoon-ledger.svg",
+        altText: "Purchoon ERP Customer Udhar Khata and Running Balance Audit",
+        caption:
+          "Complete credit ledger replacing paper diaries with credit limits, customer payment history, and instant balance receipts.",
+        category: "Khata & Ledgers",
+      },
+      {
+        id: "purchoon-wholesale",
+        slotNumber: "04",
+        slotLabel: "Wholesale Bori Receiving & Warehouse",
+        title: "50kg Sack Deduction, Driver Challans & Lot Averaging",
+        subtitle: "Bulk Grain Intake & Tare Weight Allowance",
+        dimensions: "1600 × 900 (16:9)",
+        src: "/images/products/purchoon-wholesale.svg",
+        altText:
+          "Purchoon ERP Wholesale Bori Goods Receiving and Warehouse Stacking",
+        caption:
+          "Wholesale receiving workflow managing truck weighbridge gross weights, tare sack deductions, and bulk-to-loose stock conversion.",
+        category: "Wholesale Operations",
+      },
     ],
   },
 
@@ -923,6 +1046,63 @@ export const PRODUCTS_DATA: Record<string, ProductData> = {
       "Batch 3-copy bank fee challan generation with automated late fines",
       "Immediate absence alerts dispatched to parents via SMS gateway",
       "Multi-campus executive reporting with strict departmental permissions",
+    ],
+    screenshots: [
+      {
+        id: "cambridge-hero",
+        slotNumber: "01",
+        slotLabel: "Hero Master Screenshot",
+        title: "CambridgeDesk School Management & Academic Console",
+        subtitle: "Executive Campus Telemetry & Terminal Overview",
+        dimensions: "1920 × 1080 (16:9 Full HD)",
+        src: "/images/products/cambridge-hero.svg",
+        altText:
+          "CambridgeDesk School Management and Academic Executive Console",
+        caption:
+          "Original interface capture of CambridgeDesk executive console tracking student attendance, syllabus pacing, and tuition fee collection.",
+        category: "Academic Operations",
+      },
+      {
+        id: "cambridge-gradebook",
+        slotNumber: "02",
+        slotLabel: "Examination & Gradebook Engine",
+        title: "Cambridge O/A-Level Gradebook & Candidate Marksheets",
+        subtitle: "Component Weighting & Standardized Grade Thresholds",
+        dimensions: "1600 × 900 (16:9)",
+        src: "/images/products/cambridge-gradebook.svg",
+        altText:
+          "CambridgeDesk Examination Tabulation and Grade Threshold Engine",
+        caption:
+          "Automated candidate marksheet compiler with Cambridge grade boundaries (A*–U), GPA calculation, and batch PDF transcript printing.",
+        category: "Examinations",
+      },
+      {
+        id: "cambridge-challan",
+        slotNumber: "03",
+        slotLabel: "Fee Challan & Banking System",
+        title: "3-Copy Automated Bank Fee Challan Generation",
+        subtitle: "Bank Copy, School Copy, Student Copy & Barcodes",
+        dimensions: "1600 × 900 (16:9)",
+        src: "/images/products/cambridge-challan.svg",
+        altText: "CambridgeDesk 3-Copy Automated Bank Fee Challan Generator",
+        caption:
+          "Batch fee voucher generation with automatic sibling concessions, late payment fines, and direct bank reconciliation integration.",
+        category: "Fee & Finance",
+      },
+      {
+        id: "cambridge-director",
+        slotNumber: "04",
+        slotLabel: "Multi-Campus Console & Parent Portal",
+        title: "Executive Director Multi-Campus Overview & Parent App",
+        subtitle: "Cross-Campus Performance & Instant Attendance Push",
+        dimensions: "1200 × 800 (16:10)",
+        src: "/images/products/cambridge-director.svg",
+        altText:
+          "CambridgeDesk Multi-Campus Director Telemetry and Parent Portal",
+        caption:
+          "Central head-office command dashboard aggregating tuition collection, teacher workload, and parent mobile application communications.",
+        category: "Governance & Mobile",
+      },
     ],
   },
 
@@ -1211,6 +1391,63 @@ export const PRODUCTS_DATA: Record<string, ProductData> = {
       "Instant chemical salt substitution engine for out-of-stock brands",
       "Native box, strip, and tablet unit breakdown calculation",
       "Regulatory-compliant narcotics register and prescription logging",
+    ],
+    screenshots: [
+      {
+        id: "pharmacy-hero",
+        slotNumber: "01",
+        slotLabel: "Hero Master Screenshot",
+        title: "Pharmacy Prescription POS & Generic Salt Lookup",
+        subtitle: "Fast Drug Dispensing & Interaction Verification",
+        dimensions: "1920 × 1080 (16:9 Full HD)",
+        src: "/images/products/pharmacy-hero.svg",
+        altText:
+          "Pharmacy ERP Prescription Counter POS and Generic Salt Database",
+        caption:
+          "Original interface capture of pharmacy dispensing counter with active chemical salt cross-referencing and strip/tablet unit breakdown.",
+        category: "Counter Operations",
+      },
+      {
+        id: "pharmacy-batch",
+        slotNumber: "02",
+        slotLabel: "Batch Expiry & Quarantine Tracker",
+        title: "FEFO Stock Rotation & Automatic Drug Quarantine",
+        subtitle: "90-Day Expiry Warnings & Temperature Compliance",
+        dimensions: "1600 × 900 (16:9)",
+        src: "/images/products/pharmacy-batch.svg",
+        altText: "Pharmacy ERP Batch Expiry Tracker and Quarantine Lock",
+        caption:
+          "Automated shelf-life monitoring preventing expired medicines from reaching patients with automated PO return notifications.",
+        category: "Batch Control",
+      },
+      {
+        id: "pharmacy-reports",
+        slotNumber: "03",
+        slotLabel: "Regulatory Narcotics Register & Audit",
+        title: "Schedule G Compliance & Controlled Drug Auditing",
+        subtitle: "Doctor PMDC, Patient CNIC & Prescription QR Logs",
+        dimensions: "1600 × 900 (16:9)",
+        src: "/images/products/pharmacy-reports.svg",
+        altText:
+          "Pharmacy ERP Narcotics Register and Drug Regulatory Audit Log",
+        caption:
+          "Tamper-proof controlled substance register generating official audit reports with physician credentials and signature verification.",
+        category: "Regulatory & Audit",
+      },
+      {
+        id: "pharmacy-mobile",
+        slotNumber: "04",
+        slotLabel: "Distributor Invoicing & Inventory Hub",
+        title: "Distributor PO Automation & Multi-Store Stock",
+        subtitle: "Purchase Margin Analytics & Centralized Ordering",
+        dimensions: "1200 × 800 (16:10)",
+        src: "/images/products/pharmacy-mobile.svg",
+        altText:
+          "Pharmacy ERP Distributor Purchase Invoicing and Central Stock",
+        caption:
+          "Direct distributor order matching, wholesale discount verification, and multi-location branch inventory replenishment.",
+        category: "Procurement & Stock",
+      },
     ],
   },
 
@@ -1501,6 +1738,62 @@ export const PRODUCTS_DATA: Record<string, ProductData> = {
       "Automated Material Requirements Planning (MRP) to prevent shortages",
       "Accurate batch cost roll-up incorporating materials, labor, and machine hours",
     ],
+    screenshots: [
+      {
+        id: "industrial-hero",
+        slotNumber: "01",
+        slotLabel: "Hero Master Screenshot",
+        title: "Industrial Work Order & Multi-Level BOM Hub",
+        subtitle: "Production Bay Command & Assembly Traveler",
+        dimensions: "1920 × 1080 (16:9 Full HD)",
+        src: "/images/products/industrial-hero.svg",
+        altText:
+          "Industrial ERP Shop Floor Work Order and Multi-Level BOM Console",
+        caption:
+          "Original interface capture of manufacturing work order console with hierarchical BOM cost roll-up and machine stage tracking.",
+        category: "Plant Operations",
+      },
+      {
+        id: "industrial-routing",
+        slotNumber: "02",
+        slotLabel: "Shop Floor Routing & OEE Dashboard",
+        title: "Station Capacity, Machine Cycles & OEE Metrics",
+        subtitle: "Overall Equipment Effectiveness & Operator Logs",
+        dimensions: "1600 × 900 (16:9)",
+        src: "/images/products/industrial-routing.svg",
+        altText: "Industrial ERP Production Routing and Machine Downtime Log",
+        caption:
+          "Shop floor routing traveler with live operator shift tracking, machine cycle times, and automated downtime reason analysis.",
+        category: "Routing & OEE",
+      },
+      {
+        id: "industrial-costing",
+        slotNumber: "03",
+        slotLabel: "Material Scrap & Cost Variance",
+        title: "Standard vs Actual Costing & Scrap Recovery",
+        subtitle: "BOM Theoretical Material vs Actual Drawn Ledger",
+        dimensions: "1600 × 900 (16:9)",
+        src: "/images/products/industrial-costing.svg",
+        altText: "Industrial ERP Material Scrap Ledger and Cost Variance Audit",
+        caption:
+          "Granular cost accounting dashboard reporting direct material variances, scrap metal recapture values, and labor rate efficiency.",
+        category: "Cost Accounting",
+      },
+      {
+        id: "industrial-mobile",
+        slotNumber: "04",
+        slotLabel: "Gate Pass, Store & Lot Traceability",
+        title: "Raw Material Inward, Heat Numbers & Vendor QA",
+        subtitle: "Returnable / Non-Returnable Gate Pass Ledger",
+        dimensions: "1200 × 800 (16:10)",
+        src: "/images/products/industrial-mobile.svg",
+        altText:
+          "Industrial ERP Raw Material Gate Pass and Heat Number Lot Traceability",
+        caption:
+          "Raw material receipt matching against vendor mill test certificates with barcode serialized gate pass management.",
+        category: "Store & Logistics",
+      },
+    ],
   },
 
   "qistmarket-erp": {
@@ -1789,6 +2082,61 @@ export const PRODUCTS_DATA: Record<string, ProductData> = {
       "Digital KYC and guarantor verification vault with contract printing",
       "Mobile-friendly field recovery routing with instant SMS receipting",
       "Portfolio at Risk (PAR) monitoring and 30/60/90-day defaulter escalation",
+    ],
+    screenshots: [
+      {
+        id: "qistmarket-hero",
+        slotNumber: "01",
+        slotLabel: "Hero Master Screenshot",
+        title: "QistMarket Installment Engine & Contract Underwriting",
+        subtitle: "Hire-Purchase Asset Financing & EMI Calculator",
+        dimensions: "1920 × 1080 (16:9 Full HD)",
+        src: "/images/products/qistmarket-hero.svg",
+        altText:
+          "Qistmarket ERP Installment Engine and EMI Schedule Underwriting",
+        caption:
+          "Original interface capture of installment underwriting engine calculating down payments, markup rates, and automated EMI due dates.",
+        category: "Underwriting",
+      },
+      {
+        id: "qistmarket-kyc",
+        slotNumber: "02",
+        slotLabel: "2-Guarantor KYC Verification Desk",
+        title: "Identity Verification, NADRA Verisys & Risk Scoring",
+        subtitle: "Utility Bills, Salary Slips & Residential Verification",
+        dimensions: "1600 × 900 (16:9)",
+        src: "/images/products/qistmarket-kyc.svg",
+        altText: "Qistmarket ERP 2-Guarantor KYC Compliance Verification Desk",
+        caption:
+          "Comprehensive credit risk gate verifying primary applicant CNIC, residential utility documents, and two formal guarantor profiles.",
+        category: "KYC & Verification",
+      },
+      {
+        id: "qistmarket-recovery",
+        slotNumber: "03",
+        slotLabel: "Field Recovery Geo-Routing & Overdue Aging",
+        title: "30 / 60 / 90 Days Defaulter Aging & Recovery Routes",
+        subtitle: "Field Officer Street Assignments & Cash Targets",
+        dimensions: "1600 × 900 (16:9)",
+        src: "/images/products/qistmarket-recovery.svg",
+        altText: "Qistmarket ERP Field Recovery Routing and Delinquency Aging",
+        caption:
+          "Field recovery dispatch module organizing daily customer visits by sector with automated client SMS reminders.",
+        category: "Recovery & Aging",
+      },
+      {
+        id: "qistmarket-mobile",
+        slotNumber: "04",
+        slotLabel: "Mobile Recovery App & Repossession Audit",
+        title: "Field Officer Bluetooth Receipts & Legal Repossession",
+        subtitle: "Doorstep Cash Collections & Instant Digital SMS Receipts",
+        dimensions: "1200 × 800 (16:10)",
+        src: "/images/products/qistmarket-mobile.svg",
+        altText: "Qistmarket ERP Mobile Recovery App and Doorstep Receipting",
+        caption:
+          "Mobile field officer ledger generating real-time Bluetooth thermal slips and instant customer SMS collection confirmations.",
+        category: "Mobile Recovery",
+      },
     ],
   },
 }

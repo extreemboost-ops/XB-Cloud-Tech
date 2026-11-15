@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Award, CheckCircle2, Info } from "lucide-react"
+import ProductScreenshotFrame from "../../../components/ProductScreenshotFrame"
 
 interface SubjectScore {
   subject: string
@@ -282,6 +283,41 @@ export default function CambridgeExamExperience() {
               qualitative teacher remarks.
             </span>
           </p>
+        </div>
+
+        {/* ── SCREENSHOT SLOT 02: CAMBRIDGE GRADEBOOK & MARKSHEETS ── */}
+        <div className="mt-14 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+            <div>
+              <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-[#0B5FFF] block">
+                Original Product Screenshot • Slot 02
+              </span>
+              <h3 className="text-xl font-bold text-[#0A0F1E]">
+                CambridgeDesk • Cambridge O/A-Level Gradebook & Candidate
+                Marksheets
+              </h3>
+            </div>
+            <span className="text-xs font-mono text-slate-500">
+              Admin Replaceable Slot • 1600 × 900 (16:9)
+            </span>
+          </div>
+          <ProductScreenshotFrame
+            slot={{
+              id: "cambridge-gradebook",
+              slotNumber: "02",
+              slotLabel: "Examination & Gradebook Engine",
+              title: "Cambridge O/A-Level Gradebook & Candidate Marksheets",
+              subtitle: "Component Weighting & Standardized Grade Thresholds",
+              dimensions: "1600 × 900 (16:9)",
+              src: "/images/products/cambridge-gradebook.svg",
+              altText:
+                "CambridgeDesk Examination Tabulation and Grade Threshold Engine",
+              caption:
+                "Automated candidate marksheet compiler with Cambridge grade boundaries (A*–U), GPA calculation, and batch PDF transcript printing.",
+              category: "Examinations",
+            }}
+            variant="section"
+          />
         </div>
       </div>
     </section>

@@ -1,5 +1,7 @@
 import { useState } from "react"
+
 import { Link, useNavigate } from "react-router-dom"
+
 import {
   ShoppingBag,
   Store,
@@ -32,67 +34,111 @@ import {
   RefreshCw,
   X,
 } from "lucide-react"
+
 import { PRODUCTS_DATA, ProductData } from "../data/products"
+
 import Breadcrumb from "./ui/Breadcrumb"
 
+import ProductScreenshotFrame, {
+  ScreenshotSlot,
+} from "./ProductScreenshotFrame"
+
 // Helper to resolve icon by string name
+
 const ICON_MAP: Record<string, React.ElementType> = {
   ShoppingBag,
+
   Store,
+
   GraduationCap,
+
   HeartPulse,
+
   Factory,
+
   CreditCard,
+
   Layers,
+
   Truck,
+
   ShieldCheck,
+
   TrendingUp,
+
   CheckCircle2,
+
   Users,
+
   Building2,
+
   Scale,
+
   Package,
+
   Navigation,
+
   Calculator,
+
   BookOpen,
+
   AlertTriangle,
 }
 
 // ── PRODUCT SIMULATORS ────────────────────────────────────────────────────────
 
 // 1. Storex POS Simulator
+
 function StorexSimulator() {
   const [items, setItems] = useState([
     {
       name: "Oxford Slim-Fit Shirt (M)",
+
       sku: "SH-8841",
+
       price: 2400,
+
       qty: 1,
+
       barcode: "8964001284",
     },
+
     {
       name: "Denim Chino Trousers (32)",
+
       sku: "TR-5520",
+
       price: 3200,
+
       qty: 1,
+
       barcode: "8964009923",
     },
   ])
+
   const [tender, setTender] = useState<"cash" | "card" | "khata">("cash")
+
   const [receiptGenerated, setReceiptGenerated] = useState(false)
 
   const subtotal = items.reduce((acc, curr) => acc + curr.price * curr.qty, 0)
+
   const tax = Math.round(subtotal * 0.05)
+
   const total = subtotal + tax
 
   const addItem = () => {
     setItems([
       ...items,
+
       {
         name: "Casual Leather Belt (Black)",
+
         sku: "AC-1029",
+
         price: 950,
+
         qty: 1,
+
         barcode: "8964007712",
       },
     ])
@@ -248,20 +294,28 @@ function StorexSimulator() {
 }
 
 // 2. Purchoon Grocery Weight Simulator
+
 function PurchoonSimulator() {
   const [mode, setMode] = useState<"weight" | "reverse">("weight")
+
   const [weightKg, setWeightKg] = useState("1.450")
+
   const [reverseRupees, setReverseRupees] = useState("150")
+
   const [selectedCommodity, setSelectedCommodity] = useState({
     name: "Daal Chana (Pulses)",
+
     pricePerKg: 280,
+
     unit: "Kg",
   })
 
   // Calculations
+
   const calculatedPrice = Math.round(
     parseFloat(weightKg || "0") * selectedCommodity.pricePerKg,
   )
+
   const calculatedWeightGrams = Math.round(
     (parseFloat(reverseRupees || "0") / selectedCommodity.pricePerKg) * 1000,
   )
@@ -289,8 +343,11 @@ function PurchoonSimulator() {
           <div className="grid grid-cols-1 gap-2">
             {[
               { name: "Daal Chana (Pulses)", pricePerKg: 280, unit: "Kg" },
+
               { name: "Super Basmati Rice", pricePerKg: 340, unit: "Kg" },
+
               { name: "Refined White Sugar", pricePerKg: 155, unit: "Kg" },
+
               { name: "Whole Wheat Flour (Atta)", pricePerKg: 120, unit: "Kg" },
             ].map((c) => (
               <button
@@ -447,6 +504,7 @@ function PurchoonSimulator() {
 }
 
 // 3. CambridgeDesk Simulator
+
 function CambridgeDeskSimulator() {
   const [tab, setTab] = useState<"challan" | "marksheet" | "sms">("challan")
 
@@ -586,30 +644,49 @@ function CambridgeDeskSimulator() {
                 {[
                   {
                     s: "English Language (1123)",
+
                     max: 100,
+
                     obt: 91,
+
                     pct: "91%",
+
                     g: "A*",
                   },
+
                   {
                     s: "Mathematics Syllabus D (4024)",
+
                     max: 100,
+
                     obt: 96,
+
                     pct: "96%",
+
                     g: "A*",
                   },
+
                   {
                     s: "Physics (5054)",
+
                     max: 100,
+
                     obt: 84,
+
                     pct: "84%",
+
                     g: "A",
                   },
+
                   {
                     s: "Chemistry (5070)",
+
                     max: 100,
+
                     obt: 88,
+
                     pct: "88%",
+
                     g: "A",
                   },
                 ].map((row, i) => (
@@ -660,6 +737,7 @@ function CambridgeDeskSimulator() {
 }
 
 // 4. Pharmacy Simulator
+
 function PharmacySimulator() {
   const [search, setSearch] = useState("Augmentin 625mg")
 
@@ -755,17 +833,25 @@ function PharmacySimulator() {
             {[
               {
                 brand: "Curam 625mg (Novartis)",
+
                 price: "Rs. 380 / strip",
+
                 status: "In Stock (12 pk)",
               },
+
               {
                 brand: "Klavox 625mg (Bosch)",
+
                 price: "Rs. 320 / strip",
+
                 status: "In Stock (8 pk)",
               },
+
               {
                 brand: "Co-Amoxiclav 625mg (Getz)",
+
                 price: "Rs. 295 / strip",
+
                 status: "In Stock (20 pk)",
               },
             ].map((alt, idx) => (
@@ -800,6 +886,7 @@ function PharmacySimulator() {
 }
 
 // 5. Industrial ERP Simulator
+
 function IndustrialSimulator() {
   return (
     <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 text-white font-sans shadow-2xl">
@@ -847,26 +934,41 @@ function IndustrialSimulator() {
             {[
               {
                 stage: "1. CNC Machining",
+
                 status: "Completed (Shift 1)",
+
                 time: "45 mins",
+
                 state: "text-emerald-400 border-emerald-500/40",
               },
+
               {
                 stage: "2. Gear Heat Treatment",
+
                 status: "In Progress (Oven 3)",
+
                 time: "120 mins",
+
                 state: "text-amber-400 border-amber-500/40",
               },
+
               {
                 stage: "3. Sub-Assembly Line",
+
                 status: "Queued (Bay 4)",
+
                 time: "60 mins",
+
                 state: "text-neutral-400 border-neutral-800",
               },
+
               {
                 stage: "4. Quality Inspection",
+
                 status: "Pending Clearance",
+
                 time: "20 mins",
+
                 state: "text-neutral-500 border-neutral-800",
               },
             ].map((st, i) => (
@@ -925,17 +1027,25 @@ function IndustrialSimulator() {
 }
 
 // 6. Qistmarket Simulator
+
 function QistmarketSimulator() {
   const [assetPrice, setAssetPrice] = useState(120000)
+
   const [downPaymentPct, setDownPaymentPct] = useState(25)
+
   const [tenureMonths, setTenureMonths] = useState(12)
 
   const downPaymentAmount = Math.round((assetPrice * downPaymentPct) / 100)
+
   const financedAmount = assetPrice - downPaymentAmount
+
   const markupRate =
     tenureMonths === 6 ? 0.15 : tenureMonths === 12 ? 0.25 : 0.35
+
   const totalMarkup = Math.round(financedAmount * markupRate)
+
   const totalPayable = financedAmount + totalMarkup
+
   const monthlyInstallment = Math.round(totalPayable / tenureMonths)
 
   return (
@@ -1082,41 +1192,93 @@ export default function ProductPageTemplate({
   product,
 }: ProductPageTemplateProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(0)
+
   const [demoModalOpen, setDemoModalOpen] = useState(false)
+
   const [demoSubmitted, setDemoSubmitted] = useState(false)
+
   const [demoForm, setDemoForm] = useState({
     name: "",
+
     email: "",
+
     phone: "",
+
     organization: "",
   })
+
   const navigate = useNavigate()
+
+  const [heroMode, setHeroMode] = useState<"screenshot" | "simulator">(
+    "screenshot",
+  )
+
+  // 4 Screenshot Slots for Product (Hero + 3 Core Modules)
+
+  const slot01: ScreenshotSlot = product.screenshots?.[0] || {
+    id: `${product.slug}-hero`,
+
+    slotNumber: "01",
+
+    slotLabel: "Hero Master Screenshot",
+
+    title: `${product.name} Primary Command Console`,
+
+    subtitle: "Main System Dashboard & Operational Overview",
+
+    dimensions: "1920 × 1080 (16:9 Full HD)",
+
+    src: `/images/products/${product.slug.replace("-erp", "")}-hero.svg`,
+
+    altText: `${product.name} Primary Dashboard Interface`,
+
+    caption: `Original screenshot capture for ${product.name} master console. Replaceable by administrator.`,
+
+    category: "Master Overview",
+  }
+
+  const slot02: ScreenshotSlot | undefined = product.screenshots?.[1]
+
+  const slot03: ScreenshotSlot | undefined = product.screenshots?.[2]
+
+  const slot04: ScreenshotSlot | undefined = product.screenshots?.[3]
 
   const handleDemoSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+
     setDemoSubmitted(true)
+
     setTimeout(() => {
       setDemoSubmitted(false)
+
       setDemoModalOpen(false)
+
       setDemoForm({ name: "", email: "", phone: "", organization: "" })
     }, 2500)
   }
 
   // Choose the interactive simulator matching the product
+
   const renderSimulator = () => {
     switch (product.slug) {
       case "storex-erp":
         return <StorexSimulator />
+
       case "purchoon-erp":
         return <PurchoonSimulator />
+
       case "cambridgedesk":
         return <CambridgeDeskSimulator />
+
       case "pharmacy-erp":
         return <PharmacySimulator />
+
       case "industrial-erp":
         return <IndustrialSimulator />
+
       case "qistmarket-erp":
         return <QistmarketSimulator />
+
       default:
         return null
     }
@@ -1130,7 +1292,9 @@ export default function ProductPageTemplate({
           <Breadcrumb
             items={[
               { label: "Home", to: "/" },
+
               { label: "Products", to: "/products" },
+
               { label: product.name },
             ]}
           />
@@ -1144,58 +1308,77 @@ export default function ProductPageTemplate({
       <section className="bg-dark-base text-white pt-14 pb-20 px-6 border-b border-neutral-900 relative overflow-hidden">
         <div className="absolute inset-0 bg-radial-gradient from-primary/10 via-transparent to-transparent pointer-events-none" />
 
-        <div className="max-w-[1200px] mx-auto relative z-10">
-          <div className="max-w-3xl space-y-6">
-            <div className="flex flex-wrap items-center gap-3">
-              <span
-                className={`text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border ${product.accentBg} ${product.color}`}
-              >
-                {product.category}
-              </span>
-              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/10 text-neutral-300">
-                {product.badge}
-              </span>
-              <span className="text-xs font-mono text-neutral-400">
-                Scale: {product.scale.join(" • ")}
-              </span>
+        <div className="max-w-[1240px] mx-auto relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+            {/* Left Column: Product Value Proposition */}
+            <div className="lg:col-span-6 space-y-6">
+              <div className="flex flex-wrap items-center gap-3">
+                <span
+                  className={`text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border ${product.accentBg} ${product.color}`}
+                >
+                  {product.category}
+                </span>
+                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-white/10 text-neutral-300">
+                  {product.badge}
+                </span>
+                <span className="text-xs font-mono text-neutral-400">
+                  Scale: {product.scale.join(" • ")}
+                </span>
+              </div>
+
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-[1.12]">
+                {product.heroHeadline}
+              </h1>
+
+              <p className="text-base sm:text-lg text-neutral-300 font-normal leading-relaxed">
+                {product.heroSubhead}
+              </p>
+
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <button
+                  onClick={() => setDemoModalOpen(true)}
+                  className="px-6 py-3.5 bg-primary hover:bg-primary/90 text-white rounded-xl font-bold text-sm transition-all shadow-lg hover:shadow-primary/20 flex items-center gap-2 cursor-pointer"
+                >
+                  <Calendar className="w-4 h-4 text-secondary" /> Book a{" "}
+                  {product.name} Demo
+                </button>
+                <a
+                  href="#modules"
+                  className="px-6 py-3.5 bg-white/10 hover:bg-white/15 text-white rounded-xl font-semibold text-sm transition-colors border border-white/10 flex items-center gap-2"
+                >
+                  Explore Modules <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+
+              {/* Quick Operational Metrics */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/10">
+                {product.stats.map((st, i) => (
+                  <div key={i} className="space-y-1">
+                    <div className="text-lg sm:text-xl font-bold font-mono text-white">
+                      {st.value}
+                    </div>
+                    <div className="text-[10px] text-neutral-400 font-medium uppercase tracking-wider">
+                      {st.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
-              {product.heroHeadline}
-            </h1>
+            {/* Right Column: Hero Original Screenshot Placeholder by Admin (Slot 01) */}
+            <div className="lg:col-span-6">
+              <ProductScreenshotFrame
+                slot={slot01}
+                variant="hero"
+                fallbackUI={renderSimulator()}
+                interactiveToggle={{
+                  activeMode: heroMode,
 
-            <p className="text-base sm:text-lg md:text-xl text-neutral-300 font-normal leading-relaxed">
-              {product.heroSubhead}
-            </p>
+                  onToggle: setHeroMode,
 
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <button
-                onClick={() => setDemoModalOpen(true)}
-                className="px-6 py-3.5 bg-primary hover:bg-primary/90 text-white rounded-xl font-bold text-sm transition-all shadow-lg hover:shadow-primary/20 flex items-center gap-2 cursor-pointer"
-              >
-                <Calendar className="w-4 h-4 text-secondary" /> Book a{" "}
-                {product.name} Demo
-              </button>
-              <a
-                href="#modules"
-                className="px-6 py-3.5 bg-white/10 hover:bg-white/15 text-white rounded-xl font-semibold text-sm transition-colors border border-white/10 flex items-center gap-2"
-              >
-                Explore Modules <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-
-            {/* Quick Operational Metrics */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-white/10">
-              {product.stats.map((st, i) => (
-                <div key={i} className="space-y-1">
-                  <div className="text-xl sm:text-2xl font-bold font-mono text-white">
-                    {st.value}
-                  </div>
-                  <div className="text-[11px] text-neutral-400 font-medium uppercase tracking-wider">
-                    {st.label}
-                  </div>
-                </div>
-              ))}
+                  simulatorLabel: "Live Simulator",
+                }}
+              />
             </div>
           </div>
         </div>
@@ -1320,6 +1503,7 @@ export default function ProductPageTemplate({
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {product.modules.map((mod, idx) => {
               const Icon = ICON_MAP[mod.iconName] || Layers
+
               return (
                 <div
                   key={idx}
@@ -1351,6 +1535,26 @@ export default function ProductPageTemplate({
               )
             })}
           </div>
+
+          {/* ── SCREENSHOT SLOT 02: CORE OPERATIONS & TRANSACTIONS ── */}
+          {slot02 && (
+            <div className="pt-12 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-neutral-200 pb-3">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-primary block">
+                    Product Screen Capture • Slot 02
+                  </span>
+                  <h3 className="text-xl font-bold text-neutral-900">
+                    {slot02.title}
+                  </h3>
+                </div>
+                <span className="text-xs font-mono text-neutral-500">
+                  Admin Replaceable Slot • {slot02.dimensions}
+                </span>
+              </div>
+              <ProductScreenshotFrame slot={slot02} variant="section" />
+            </div>
+          )}
         </div>
       </section>
 
@@ -1443,6 +1647,26 @@ export default function ProductPageTemplate({
               </div>
             ))}
           </div>
+
+          {/* ── SCREENSHOT SLOT 03: FINANCIAL AUDITING & REPORTING ── */}
+          {slot03 && (
+            <div className="pt-12 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-neutral-200 pb-3">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-primary block">
+                    Product Screen Capture • Slot 03
+                  </span>
+                  <h3 className="text-xl font-bold text-neutral-900">
+                    {slot03.title}
+                  </h3>
+                </div>
+                <span className="text-xs font-mono text-neutral-500">
+                  Admin Replaceable Slot • {slot03.dimensions}
+                </span>
+              </div>
+              <ProductScreenshotFrame slot={slot03} variant="section" />
+            </div>
+          )}
         </div>
       </section>
 
@@ -1525,6 +1749,26 @@ export default function ProductPageTemplate({
               </div>
             </div>
           </div>
+
+          {/* ── SCREENSHOT SLOT 04: CLOUD, MOBILE & MULTI-BRANCH TELEMETRY ── */}
+          {slot04 && (
+            <div className="pt-12 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-neutral-800 pb-3">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-secondary block">
+                    Product Screen Capture • Slot 04
+                  </span>
+                  <h3 className="text-xl font-bold text-white">
+                    {slot04.title}
+                  </h3>
+                </div>
+                <span className="text-xs font-mono text-neutral-400">
+                  Admin Replaceable Slot • {slot04.dimensions}
+                </span>
+              </div>
+              <ProductScreenshotFrame slot={slot04} variant="section" />
+            </div>
+          )}
         </div>
       </section>
 
@@ -1585,6 +1829,7 @@ export default function ProductPageTemplate({
           <div className="space-y-3">
             {product.faqs.map((faq, idx) => {
               const isOpen = openFaq === idx
+
               return (
                 <div
                   key={idx}
@@ -1663,7 +1908,9 @@ export default function ProductPageTemplate({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {product.relatedProducts.map((relSlug) => {
               const rel = PRODUCTS_DATA[relSlug]
+
               if (!rel) return null
+
               return (
                 <Link
                   key={rel.slug}

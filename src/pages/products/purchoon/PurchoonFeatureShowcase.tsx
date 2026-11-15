@@ -8,6 +8,7 @@ import {
   Truck,
   CheckCircle2,
 } from "lucide-react"
+import ProductScreenshotFrame from "../../../components/ProductScreenshotFrame"
 
 interface FeatureTab {
   id: string
@@ -531,6 +532,40 @@ export default function PurchoonFeatureShowcase() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* ── SCREENSHOT SLOT 02: LOOSE-ITEM CALCULATOR TERMINAL ── */}
+        <div className="mt-14 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+            <div>
+              <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-[#0B5FFF] block">
+                Original Product Screenshot • Slot 02
+              </span>
+              <h3 className="text-xl font-bold text-[#0A0F1E]">
+                Purchoon ERP • Loose-Item Calculator & Fast Billing Terminal
+              </h3>
+            </div>
+            <span className="text-xs font-mono text-slate-500">
+              Admin Replaceable Slot • 1600 × 900 (16:9)
+            </span>
+          </div>
+          <ProductScreenshotFrame
+            slot={{
+              id: "purchoon-pos",
+              slotNumber: "02",
+              slotLabel: "Loose-Item Calculator Terminal",
+              title: "Gram / Kg Precision Billing & Hybrid Cart Engine",
+              subtitle: "Reverse Price-to-Weight & Fast Commodity Entry",
+              dimensions: "1600 × 900 (16:9)",
+              src: "/images/products/purchoon-pos.svg",
+              altText:
+                "Purchoon ERP Loose-Item Calculator and Fast Billing Terminal",
+              caption:
+                "High-speed billing interface supporting gram-level calculation, barcode item scanning, and instant customer ticket compilation.",
+              category: "POS & Billing",
+            }}
+            variant="section"
+          />
         </div>
       </div>
     </section>

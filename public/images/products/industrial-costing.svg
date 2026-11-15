@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0F1E" />
+      <stop offset="50%" stop-color="#0E162B" />
+      <stop offset="100%" stop-color="#080C17" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0B5FFF" />
+      <stop offset="100%" stop-color="#EF4444" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141E38" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0F172C" stop-opacity="0.9" />
+    </linearGradient>
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1920" height="1080" fill="url(#bgGrad)" />
+
+  <!-- Subtle Ambient Glow -->
+  <circle cx="960" cy="180" r="600" fill="#0B5FFF" opacity="0.08" filter="blur(80px)" />
+  <circle cx="1600" cy="800" r="500" fill="#EF4444" opacity="0.06" filter="blur(90px)" />
+
+  <!-- Window Chrome Header -->
+  <rect x="0" y="0" width="1920" height="72" fill="#070A14" />
+  <line x1="0" y1="72" x2="1920" y2="72" stroke="#1E293B" stroke-width="2" />
+
+  <!-- Window Controls -->
+  <circle cx="48" cy="36" r="10" fill="#EF4444" opacity="0.85" />
+  <circle cx="78" cy="36" r="10" fill="#F59E0B" opacity="0.85" />
+  <circle cx="108" cy="36" r="10" fill="#10B981" opacity="0.85" />
+
+  <!-- Chrome Address Bar -->
+  <rect x="180" y="16" width="600" height="40" rx="8" fill="#111827" stroke="#1F2937" stroke-width="1.5" />
+  <circle cx="204" cy="36" r="5" fill="#10B981" />
+  <text x="224" y="41" fill="#94A3B8" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="600">https://app.xbcloudtech.com/industrial-costing</text>
+
+  <!-- Badge Top Right -->
+  <rect x="1620" y="18" width="240" height="36" rx="18" fill="#0B5FFF" fill-opacity="0.2" stroke="#0B5FFF" stroke-opacity="0.5" />
+  <text x="1740" y="42" fill="#EF4444" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" letter-spacing="1.5">COST ACCOUNTING</text>
+
+  <!-- Main Work Area Container -->
+  <g transform="translate(64, 110)">
+    <!-- Header Title Bar -->
+    <rect x="0" y="0" width="1792" height="120" rx="16" fill="url(#cardGrad)" stroke="#1E293B" stroke-width="2" filter="url(#cardShadow)" />
+    
+    <text x="40" y="52" fill="#FFFFFF" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="800" letter-spacing="-0.5">Industrial ERP • Scrap Ledger &amp; Standard vs Actual Costing</text>
+    <text x="40" y="90" fill="#94A3B8" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="500">Raw Material Variance • Scrap Recovery • Unit Contribution</text>
+
+    <!-- Top Right Status in Header -->
+    <rect x="1560" y="36" width="190" height="48" rx="12" fill="#070A14" stroke="#1E293B" stroke-width="1.5" />
+    <circle cx="1588" cy="60" r="6" fill="#10B981" />
+    <text x="1608" y="65" fill="#10B981" font-family="monospace" font-size="14" font-weight="bold">SYSTEM ACTIVE</text>
+
+    <!-- 3 Stat Metrics Cards -->
+    <g transform="translate(0, 150)">
+      
+        <g transform="translate(0, 0)">
+          <rect x="0" y="0" width="560" height="130" rx="16" fill="url(#cardGrad)" stroke="#1E293B" stroke-width="2" />
+          <text x="32" y="46" fill="#94A3B8" font-family="monospace" font-size="14" font-weight="bold" letter-spacing="1">MATERIAL YIELD VARIANCE</text>
+          <text x="32" y="98" fill="#FFFFFF" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="800">+0.8% Favorable</text>
+          <rect x="490" y="32" width="36" height="36" rx="8" fill="#0B5FFF" fill-opacity="0.15" />
+          <circle cx="508" cy="50" r="6" fill="#EF4444" />
+        </g>
+      
+        <g transform="translate(616, 0)">
+          <rect x="0" y="0" width="560" height="130" rx="16" fill="url(#cardGrad)" stroke="#1E293B" stroke-width="2" />
+          <text x="32" y="46" fill="#94A3B8" font-family="monospace" font-size="14" font-weight="bold" letter-spacing="1">SCRAP RECOVERY VALUE</text>
+          <text x="32" y="98" fill="#FFFFFF" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="800">Rs. 182,000</text>
+          <rect x="490" y="32" width="36" height="36" rx="8" fill="#0B5FFF" fill-opacity="0.15" />
+          <circle cx="508" cy="50" r="6" fill="#EF4444" />
+        </g>
+      
+        <g transform="translate(1232, 0)">
+          <rect x="0" y="0" width="560" height="130" rx="16" fill="url(#cardGrad)" stroke="#1E293B" stroke-width="2" />
+          <text x="32" y="46" fill="#94A3B8" font-family="monospace" font-size="14" font-weight="bold" letter-spacing="1">STANDARD MARGIN</text>
+          <text x="32" y="98" fill="#FFFFFF" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="800">31.4% Net</text>
+          <rect x="490" y="32" width="36" height="36" rx="8" fill="#0B5FFF" fill-opacity="0.15" />
+          <circle cx="508" cy="50" r="6" fill="#EF4444" />
+        </g>
+      
+    </g>
+
+    <!-- Data Table / Main Workspace Area -->
+    <g transform="translate(0, 310)">
+      <rect x="0" y="0" width="1792" height="520" rx="16" fill="url(#cardGrad)" stroke="#1E293B" stroke-width="2" />
+      
+      <!-- Table Header Bar -->
+      <rect x="0" y="0" width="1792" height="64" rx="16" fill="#090D1A" />
+      <line x1="0" y1="64" x2="1792" y2="64" stroke="#1E293B" stroke-width="2" />
+      
+      <text x="40" y="40" fill="#94A3B8" font-family="monospace" font-size="15" font-weight="bold">LINE ITEM / ITEM IDENTIFIER</text>
+      <text x="560" y="40" fill="#94A3B8" font-family="monospace" font-size="15" font-weight="bold">SYSTEM ATTRIBUTES / CODE</text>
+      <text x="1080" y="40" fill="#94A3B8" font-family="monospace" font-size="15" font-weight="bold">QUANTITY &amp; CALCULATION</text>
+      <text x="1460" y="40" fill="#94A3B8" font-family="monospace" font-size="15" font-weight="bold">TOTAL / STATUS</text>
+
+      <!-- Table Rows -->
+      
+        <g transform="translate(0, 64)">
+          <rect x="0" y="0" width="1792" height="110" fill="transparent" opacity="0.6" />
+          <line x1="0" y1="110" x2="1792" y2="110" stroke="#1A243D" stroke-width="1.5" />
+          
+          <text x="40" y="52" fill="#FFFFFF" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700">BOM Theoretical Steel (125kg)</text>
+          <text x="40" y="82" fill="#64748B" font-family="monospace" font-size="14">Actual Drawn: 128.5kg</text>
+
+          <text x="560" y="62" fill="#93C5FD" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600">Actual Drawn: 128.5kg</text>
+
+          <text x="1080" y="62" fill="#E2E8F0" font-family="monospace" font-size="19" font-weight="bold">Scrap Offcut: 3.5kg</text>
+
+          <text x="1460" y="52" fill="#38BDF8" font-family="monospace" font-size="22" font-weight="800">Rs. 1,400 Recaptured</text>
+          
+          <rect x="1620" y="32" width="130" height="34" rx="8" fill="#10B981" fill-opacity="0.15" stroke="#10B981" stroke-opacity="0.4" />
+          <text x="1685" y="54" fill="#34D399" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">Balanced</text>
+        </g>
+      
+        <g transform="translate(0, 174)">
+          <rect x="0" y="0" width="1792" height="110" fill="#0B1020" opacity="0.6" />
+          <line x1="0" y1="110" x2="1792" y2="110" stroke="#1A243D" stroke-width="1.5" />
+          
+          <text x="40" y="52" fill="#FFFFFF" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700">Coolant &amp; Lubricant Draw</text>
+          <text x="40" y="82" fill="#64748B" font-family="monospace" font-size="14">Standard: 2.5L / Unit</text>
+
+          <text x="560" y="62" fill="#93C5FD" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600">Standard: 2.5L / Unit</text>
+
+          <text x="1080" y="62" fill="#E2E8F0" font-family="monospace" font-size="19" font-weight="bold">Actual: 2.4L / Unit</text>
+
+          <text x="1460" y="52" fill="#38BDF8" font-family="monospace" font-size="22" font-weight="800">Rs. 250 Favorable</text>
+          
+          <rect x="1620" y="32" width="130" height="34" rx="8" fill="#10B981" fill-opacity="0.15" stroke="#10B981" stroke-opacity="0.4" />
+          <text x="1685" y="54" fill="#34D399" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">Favorable</text>
+        </g>
+      
+        <g transform="translate(0, 284)">
+          <rect x="0" y="0" width="1792" height="110" fill="transparent" opacity="0.6" />
+          <line x1="0" y1="110" x2="1792" y2="110" stroke="#1A243D" stroke-width="1.5" />
+          
+          <text x="40" y="52" fill="#FFFFFF" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700">Direct Machine Labor</text>
+          <text x="40" y="82" fill="#64748B" font-family="monospace" font-size="14">Standard: 3.5 Hours</text>
+
+          <text x="560" y="62" fill="#93C5FD" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600">Standard: 3.5 Hours</text>
+
+          <text x="1080" y="62" fill="#E2E8F0" font-family="monospace" font-size="19" font-weight="bold">Actual: 3.2 Hours</text>
+
+          <text x="1460" y="52" fill="#38BDF8" font-family="monospace" font-size="22" font-weight="800">Rs. 600 Favorable</text>
+          
+          <rect x="1620" y="32" width="130" height="34" rx="8" fill="#10B981" fill-opacity="0.15" stroke="#10B981" stroke-opacity="0.4" />
+          <text x="1685" y="54" fill="#34D399" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" text-anchor="middle">Favorable</text>
+        </g>
+      
+    </g>
+
+    <!-- Bottom Verification Watermark -->
+    <g transform="translate(0, 850)">
+      <text x="40" y="30" fill="#64748B" font-family="monospace" font-size="14">XB CLOUD TECH • ENTERPRISE SAAS SUITE • ORIGINAL SYSTEM CAPTURE</text>
+      <text x="1750" y="30" fill="#64748B" font-family="monospace" font-size="14" text-anchor="end">4K ULTRA HD • 1920 × 1080</text>
+    </g>
+  </g>
+</svg>

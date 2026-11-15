@@ -12,6 +12,7 @@ import {
   CheckCircle2,
   Building2,
 } from "lucide-react"
+import ProductScreenshotFrame from "../../../components/ProductScreenshotFrame"
 
 interface OperationsModule {
   id: string
@@ -558,6 +559,40 @@ export default function CambridgeOperationsShowcase() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* ── SCREENSHOT SLOT 03: 3-COPY BANK FEE CHALLAN SYSTEM ── */}
+        <div className="mt-14 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+            <div>
+              <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-[#0B5FFF] block">
+                Original Product Screenshot • Slot 03
+              </span>
+              <h3 className="text-xl font-bold text-[#0A0F1E]">
+                CambridgeDesk • 3-Copy Automated Bank Fee Challan System
+              </h3>
+            </div>
+            <span className="text-xs font-mono text-slate-500">
+              Admin Replaceable Slot • 1600 × 900 (16:9)
+            </span>
+          </div>
+          <ProductScreenshotFrame
+            slot={{
+              id: "cambridge-challan",
+              slotNumber: "03",
+              slotLabel: "Fee Challan & Banking System",
+              title: "3-Copy Automated Bank Fee Challan Generation",
+              subtitle: "Bank Copy, School Copy, Student Copy & Barcodes",
+              dimensions: "1600 × 900 (16:9)",
+              src: "/images/products/cambridge-challan.svg",
+              altText:
+                "CambridgeDesk 3-Copy Automated Bank Fee Challan Generator",
+              caption:
+                "Batch fee voucher generation with automatic sibling concessions, late payment fines, and direct bank reconciliation integration.",
+              category: "Fee & Finance",
+            }}
+            variant="section"
+          />
         </div>
       </div>
     </section>
