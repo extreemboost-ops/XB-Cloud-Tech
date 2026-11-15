@@ -1,5 +1,6 @@
 import React from "react"
 import { Routes, Route } from "react-router-dom"
+import { Analytics } from "@vercel/analytics/react"
 import Layout from "./components/Layout"
 import HomePage from "./pages/HomePage"
 import AboutPage from "./pages/AboutPage"
@@ -28,25 +29,28 @@ function NotFound() {
 
 export default function App() {
   return (
-    <Routes>
-      {/* XB Cloud Tech public site */}
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
-        <Route path="about" element={<AboutPage />} />
-        <Route path="services" element={<ServicesPage />} />
-        <Route path="pricing" element={<PricingPage />} />
-        <Route path="portfolio" element={<PortfolioPage />} />
-        <Route path="portfolio/:id" element={<PortfolioDetailPage />} />
-        <Route path="blog" element={<BlogPage />} />
-        <Route path="blog/:slug" element={<BlogPostDetailPage />} />
-        <Route path="contact" element={<ContactPage />} />
-      </Route>
+    <>
+      <Routes>
+        {/* XB Cloud Tech public site */}
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="services" element={<ServicesPage />} />
+          <Route path="pricing" element={<PricingPage />} />
+          <Route path="portfolio" element={<PortfolioPage />} />
+          <Route path="portfolio/:id" element={<PortfolioDetailPage />} />
+          <Route path="blog" element={<BlogPage />} />
+          <Route path="blog/:slug" element={<BlogPostDetailPage />} />
+          <Route path="contact" element={<ContactPage />} />
+        </Route>
 
-      {/* Admin panel — standalone, no public Layout */}
-      <Route path="/admin/*" element={<AdminShell />} />
+        {/* Admin panel — standalone, no public Layout */}
+        <Route path="/admin/*" element={<AdminShell />} />
 
-      {/* 404 */}
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+        {/* 404 */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Analytics />
+    </>
   )
 }
