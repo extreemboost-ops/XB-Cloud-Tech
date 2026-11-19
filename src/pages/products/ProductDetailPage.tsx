@@ -1,12 +1,21 @@
-import { useParams, Link } from "react-router-dom"
+import { useParams, useLocation, Link } from "react-router-dom"
 import ProductPageTemplate from "../../components/ProductPageTemplate"
 import PurchoonPage from "./PurchoonPage"
 import CambridgeDeskPage from "./CambridgeDeskPage"
 import { PRODUCTS_DATA } from "../../data/products"
 import { AlertTriangle, ArrowRight } from "lucide-react"
 
-export default function ProductDetailPage() {
-  const { slug } = useParams<{ slug: string }>()
+export default function ProductDetailPage({
+  slugOverride,
+}: {
+  slugOverride?: string
+}) {
+  const { slug: paramSlug } = useParams<{ slug: string }>()
+  const location = useLocation()
+
+  // Resolve slug from prop, param, or pathname segment (e.g. /products/storex-erp -> storex-erp)
+  const pathSlug = location.pathname.split("/").filter(Boolean).pop()
+  const slug = slugOverride || paramSlug || pathSlug
   const product = slug ? PRODUCTS_DATA[slug] : undefined
 
   if (!product) {

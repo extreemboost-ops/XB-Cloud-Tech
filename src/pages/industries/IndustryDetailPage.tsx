@@ -1,10 +1,19 @@
-import { useParams, Link } from "react-router-dom"
+import { useParams, useLocation, Link } from "react-router-dom"
 import IndustryPageTemplate from "../../components/IndustryPageTemplate"
 import { INDUSTRIES_DATA } from "../../data/industries"
 import { AlertTriangle, ArrowRight } from "lucide-react"
 
-export default function IndustryDetailPage() {
-  const { slug } = useParams<{ slug: string }>()
+export default function IndustryDetailPage({
+  slugOverride,
+}: {
+  slugOverride?: string
+}) {
+  const { slug: paramSlug } = useParams<{ slug: string }>()
+  const location = useLocation()
+
+  // Resolve slug from prop, param, or pathname segment (e.g. /industries/retail-wholesale -> retail-wholesale)
+  const pathSlug = location.pathname.split("/").filter(Boolean).pop()
+  const slug = slugOverride || paramSlug || pathSlug
   const industry = slug ? INDUSTRIES_DATA[slug] : undefined
 
   if (!industry) {

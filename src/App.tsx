@@ -224,31 +224,39 @@ export default function App() {
             <Route path="services" element={<ServicesPage />} />
             <Route
               path="services/custom-software-development"
-              element={<ServiceDetailPage />}
+              element={
+                <ServiceDetailPage slugOverride="custom-software-development" />
+              }
             />
             <Route
               path="services/enterprise-erp"
-              element={<ServiceDetailPage />}
+              element={<ServiceDetailPage slugOverride="enterprise-erp" />}
             />
             <Route
               path="services/saas-development"
-              element={<ServiceDetailPage />}
+              element={<ServiceDetailPage slugOverride="saas-development" />}
             />
             <Route
               path="services/business-process-automation"
-              element={<ServiceDetailPage />}
+              element={
+                <ServiceDetailPage slugOverride="business-process-automation" />
+              }
             />
             <Route
               path="services/ai-integration"
-              element={<ServiceDetailPage />}
+              element={<ServiceDetailPage slugOverride="ai-integration" />}
             />
             <Route
               path="services/api-system-integration"
-              element={<ServiceDetailPage />}
+              element={
+                <ServiceDetailPage slugOverride="api-system-integration" />
+              }
             />
             <Route
               path="services/legacy-modernization"
-              element={<ServiceDetailPage />}
+              element={
+                <ServiceDetailPage slugOverride="legacy-modernization" />
+              }
             />
             <Route path="services/:slug" element={<ServiceDetailPage />} />
 
@@ -256,27 +264,27 @@ export default function App() {
             <Route path="industries" element={<IndustryOverviewPage />} />
             <Route
               path="industries/retail-wholesale"
-              element={<IndustryDetailPage />}
+              element={<IndustryDetailPage slugOverride="retail-wholesale" />}
             />
             <Route
               path="industries/education"
-              element={<IndustryDetailPage />}
+              element={<IndustryDetailPage slugOverride="education" />}
             />
             <Route
               path="industries/pharmacy"
-              element={<IndustryDetailPage />}
+              element={<IndustryDetailPage slugOverride="pharmacy" />}
             />
             <Route
               path="industries/manufacturing"
-              element={<IndustryDetailPage />}
+              element={<IndustryDetailPage slugOverride="manufacturing" />}
             />
             <Route
               path="industries/distribution"
-              element={<IndustryDetailPage />}
+              element={<IndustryDetailPage slugOverride="distribution" />}
             />
             <Route
               path="industries/financial-services"
-              element={<IndustryDetailPage />}
+              element={<IndustryDetailPage slugOverride="financial-services" />}
             />
             <Route path="industries/:slug" element={<IndustryDetailPage />} />
 

@@ -1,10 +1,19 @@
-import { useParams, Link } from "react-router-dom"
+import { useParams, useLocation, Link } from "react-router-dom"
 import ServicePageTemplate from "../../components/ServicePageTemplate"
 import { SERVICES_DATA } from "../../data/services"
 import { AlertTriangle, ArrowRight } from "lucide-react"
 
-export default function ServiceDetailPage() {
-  const { slug } = useParams<{ slug: string }>()
+export default function ServiceDetailPage({
+  slugOverride,
+}: {
+  slugOverride?: string
+}) {
+  const { slug: paramSlug } = useParams<{ slug: string }>()
+  const location = useLocation()
+
+  // Resolve slug from prop, param, or pathname segment (e.g. /services/custom-software-development -> custom-software-development)
+  const pathSlug = location.pathname.split("/").filter(Boolean).pop()
+  const slug = slugOverride || paramSlug || pathSlug
   const service = slug ? SERVICES_DATA[slug] : undefined
 
   if (!service) {
