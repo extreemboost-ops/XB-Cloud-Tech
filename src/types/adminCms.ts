@@ -183,9 +183,15 @@ export interface CMSProduct {
   updatedAt: string
   updatedBy: string
   features: CMSProductFeature[]
-  benefits: { title: string, description: string }[]
+  benefits: {
+    title: string
+    description: string
+  }[]
   screenshots: CMSProductScreenshot[]
-  faqs: { question: string, answer: string }[]
+  faqs: {
+    question: string
+    answer: string
+  }[]
   primaryCtaText: string
   primaryCtaLink: string
   secondaryCtaText?: string
@@ -206,7 +212,10 @@ export interface CMSLandingPage {
   whatsappNumber?: string
   leadFormHeadline: string
   benefits: string[]
-  proofPoints: { value: string, label: string }[]
+  proofPoints: {
+    value: string
+    label: string
+  }[]
   status: ContentStatus
   updatedAt: string
   updatedBy: string
@@ -285,7 +294,10 @@ export interface MediaAsset {
   url: string
   type: "image" | "video" | "svg" | "document"
   sizeBytes: number
-  dimensions?: { width: number, height: number }
+  dimensions?: {
+    width: number
+    height: number
+  }
   altText: string
   folder: string
   uploadedAt: string

@@ -10,7 +10,9 @@ if (
   typeof window !== "undefined" &&
   window.location.pathname &&
   window.location.pathname !== "/" &&
-  (!window.location.hash || window.location.hash === "#/" || window.location.hash === "#")
+  (!window.location.hash ||
+    window.location.hash === "#/" ||
+    window.location.hash === "#")
 ) {
   const directPath = window.location.pathname
   const directSearch = window.location.search

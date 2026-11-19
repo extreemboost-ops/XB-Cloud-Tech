@@ -1,30 +1,24 @@
 /* eslint-disable */
 
-// @ts-nocheck
-
-import React, { useState } from "react"
-
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-
 import {
   Cloud,
-  ChevronDown,
-  Menu,
   ChevronRight,
   Globe,
   Terminal,
-  Briefcase,
   ArrowRight,
   Quote,
-  TrendingUp,
-  DollarSign,
-  Clock,
-  Users,
   CheckCircle2,
   Building2,
   Stethoscope,
   ShoppingCart,
   GraduationCap,
+  Zap,
+  Database,
+  Shield,
+  Server,
+  Layers,
 } from "lucide-react"
 
 const CTABanner = () => {

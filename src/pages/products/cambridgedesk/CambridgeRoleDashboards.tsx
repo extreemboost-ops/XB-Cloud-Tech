@@ -6,7 +6,10 @@ interface RoleProfile {
   roleTitle: string
   targetUser: string
   focusArea: string
-  primaryMetrics: { label: string, value: string }[]
+  primaryMetrics: {
+    label: string
+    value: string
+  }[]
   keyResponsibilities: string[]
   dashboardSnippet: React.ReactNode
 }

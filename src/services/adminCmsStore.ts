@@ -1081,7 +1081,10 @@ class AdminCMSStore {
 
   // --- ACTIVITY LOGGING ---
   public logActivity(
-    user: AdminUser | { name: string, id: string },
+    user: AdminUser | {
+      name: string
+      id: string
+    },
     action: string,
     entityType: string,
     entityId: string,

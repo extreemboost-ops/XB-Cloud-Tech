@@ -26,6 +26,7 @@ import {
   Code,
   Copy,
   Bookmark,
+  TrendingUp,
 } from "lucide-react"
 
 const NewsletterBanner = () => {
