@@ -1,18 +1,12 @@
 /* eslint-disable */
 
-// @ts-nocheck
-
 import React, { useState, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
-
+import { adminCmsStore } from "../services/adminCmsStore"
 import {
-  Cloud,
   ChevronDown,
-  Menu,
   ChevronRight,
   Globe,
-  Terminal,
-  Briefcase,
   ArrowRight,
   MapPin,
   Phone,
@@ -101,6 +95,20 @@ const ContactPage = () => {
     }
 
     setFormState("submitting")
+
+    adminCmsStore.addSubmission(
+      "form_contact",
+      "Corporate Contact & Architecture Inquiry",
+      {
+        name: formData.name,
+        email: formData.email,
+        company: formData.company || "N/A",
+        phone: formData.phone || "N/A",
+        service: formData.service,
+        message: formData.message,
+      },
+      "/contact",
+    )
 
     setTimeout(() => {
       setFormState("success")

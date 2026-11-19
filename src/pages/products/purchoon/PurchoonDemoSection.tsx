@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { adminCmsStore } from "../../../services/adminCmsStore"
 import {
   MessageSquare,
   ArrowRight,
@@ -46,6 +47,20 @@ export default function PurchoonDemoSection() {
     }
 
     setIsSubmitting(true)
+
+    // Record submission into Admin CMS Inquiries Store
+    adminCmsStore.addSubmission(
+      "form_purchoon_demo",
+      "Purchoon ERP Live Demo Request",
+      {
+        fullName,
+        businessName,
+        businessType,
+        whatsappNumber,
+        notes: message || "N/A",
+      },
+      "/products/purchoon-erp",
+    )
 
     // Construct genuine dispatch targets using official repo contact details (+1-555-019-2834 / contact@xbcloudtech.com)
     const textContext = `*Purchoon ERP Demo Request*%0A*Name:* ${encodeURIComponent(

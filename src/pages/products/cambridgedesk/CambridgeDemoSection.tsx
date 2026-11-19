@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { adminCmsStore } from "../../../services/adminCmsStore"
 import {
   MessageSquare,
   ArrowRight,
@@ -55,6 +56,22 @@ export default function CambridgeDemoSection() {
     }
 
     setIsSubmitting(true)
+
+    // Record submission into Admin CMS Inquiries Store
+    adminCmsStore.addSubmission(
+      "form_cambridge_demo",
+      "CambridgeDesk School ERP Demo Request",
+      {
+        fullName,
+        schoolName,
+        designation,
+        whatsappNumber,
+        emailAddress,
+        studentCount,
+        notes: message || "N/A",
+      },
+      "/products/cambridgedesk",
+    )
 
     // Construct direct dispatch formats (+1-555-019-2834 / contact@xbcloudtech.com)
     const textContext = `*CambridgeDesk School ERP Demo Request*%0A*Name:* ${encodeURIComponent(

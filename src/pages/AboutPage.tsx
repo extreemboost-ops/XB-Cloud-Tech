@@ -1,27 +1,17 @@
 /* eslint-disable */
 
-// @ts-nocheck
-
-import React from "react"
-
 import { useNavigate, Link } from "react-router-dom"
 
 import {
-  Cloud,
-  ChevronDown,
-  Menu,
   ChevronRight,
   Shield,
   Zap,
   Globe,
-  Users,
   Target,
   Heart,
   Lightbulb,
   Briefcase,
   Server,
-  ArrowRight,
-  Terminal,
 } from "lucide-react"
 
 const AboutPage = () => {

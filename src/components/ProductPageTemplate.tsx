@@ -36,7 +36,7 @@ import {
 } from "lucide-react"
 
 import { PRODUCTS_DATA, ProductData } from "../data/products"
-
+import { adminCmsStore } from "../services/adminCmsStore"
 import Breadcrumb from "./ui/Breadcrumb"
 
 import ProductScreenshotFrame, {
@@ -1246,6 +1246,20 @@ export default function ProductPageTemplate({
   const handleDemoSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
+    adminCmsStore.addSubmission(
+      `form_demo_${product.slug}`,
+      `Book a Demo (${product.name})`,
+      {
+        product: product.name,
+        slug: product.slug,
+        name: demoForm.name,
+        email: demoForm.email,
+        phone: demoForm.phone,
+        organization: demoForm.organization,
+      },
+      `/products/${product.slug}`,
+    )
+
     setDemoSubmitted(true)
 
     setTimeout(() => {
@@ -1369,6 +1383,8 @@ export default function ProductPageTemplate({
             <div className="lg:col-span-6">
               <ProductScreenshotFrame
                 slot={slot01}
+                productSlug={product.slug}
+                slotNumber={1}
                 variant="hero"
                 fallbackUI={renderSimulator()}
                 interactiveToggle={{
@@ -1552,7 +1568,12 @@ export default function ProductPageTemplate({
                   Admin Replaceable Slot • {slot02.dimensions}
                 </span>
               </div>
-              <ProductScreenshotFrame slot={slot02} variant="section" />
+              <ProductScreenshotFrame
+                slot={slot02}
+                productSlug={product.slug}
+                slotNumber={2}
+                variant="section"
+              />
             </div>
           )}
         </div>
@@ -1664,7 +1685,12 @@ export default function ProductPageTemplate({
                   Admin Replaceable Slot • {slot03.dimensions}
                 </span>
               </div>
-              <ProductScreenshotFrame slot={slot03} variant="section" />
+              <ProductScreenshotFrame
+                slot={slot03}
+                productSlug={product.slug}
+                slotNumber={3}
+                variant="section"
+              />
             </div>
           )}
         </div>
@@ -1766,7 +1792,12 @@ export default function ProductPageTemplate({
                   Admin Replaceable Slot • {slot04.dimensions}
                 </span>
               </div>
-              <ProductScreenshotFrame slot={slot04} variant="section" />
+              <ProductScreenshotFrame
+                slot={slot04}
+                productSlug={product.slug}
+                slotNumber={4}
+                variant="section"
+              />
             </div>
           )}
         </div>

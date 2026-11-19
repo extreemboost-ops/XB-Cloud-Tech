@@ -1,17 +1,12 @@
 /* eslint-disable */
 
-// @ts-nocheck
-
 import React, { useState } from "react"
 
 import { useNavigate } from "react-router-dom"
 
 import {
   Cloud,
-  ChevronDown,
-  Menu,
   ChevronRight,
-  Globe,
   Terminal,
   Briefcase,
   ArrowRight,
@@ -19,11 +14,8 @@ import {
   Calendar,
   Clock,
   User,
-  Share2,
   MessageCircle,
-  Mail,
   MessageSquare,
-  Code,
   Copy,
   Bookmark,
   TrendingUp,

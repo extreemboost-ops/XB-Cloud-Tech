@@ -157,6 +157,8 @@ export default function PurchoonHero() {
 
               <ProductScreenshotFrame
                 slot={heroSlot}
+                productSlug="purchoon-erp"
+                slotNumber={1}
                 variant="hero"
                 fallbackUI={
                   <div className="p-4 sm:p-5 space-y-4">

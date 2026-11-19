@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect, useMemo } from "react"
 import {
   Maximize2,
   X,
@@ -7,6 +7,8 @@ import {
   CheckCircle2,
   Laptop,
 } from "lucide-react"
+import { adminCmsStore } from "../services/adminCmsStore"
+import { CMSProductScreenshot } from "../types/adminCms"
 
 export interface ScreenshotSlot {
   id: string
@@ -25,6 +27,8 @@ interface ProductScreenshotFrameProps {
   slot: ScreenshotSlot
   fallbackUI?: React.ReactNode
   variant?: "hero" | "section" | "compact"
+  productSlug?: string
+  slotNumber?: 1 | 2 | 3 | 4
   interactiveToggle?: {
     activeMode: "screenshot" | "simulator"
     onToggle: (mode: "screenshot" | "simulator") => void
@@ -36,12 +40,59 @@ export default function ProductScreenshotFrame({
   slot,
   fallbackUI,
   variant = "section",
+  productSlug,
+  slotNumber,
   interactiveToggle,
 }: ProductScreenshotFrameProps) {
   const [imageError, setImageError] = useState(false)
   const [isZoomOpen, setIsZoomOpen] = useState(false)
   const [showAdminInfo, setShowAdminInfo] = useState(false)
 
+  // Infer slug and slot number if not explicitly passed
+  const resolvedSlug = useMemo(() => {
+    if (productSlug) return productSlug
+    const id = slot.id.toLowerCase()
+    if (id.includes("storex")) return "storex-erp"
+    if (id.includes("purchoon")) return "purchoon-erp"
+    if (id.includes("cambridge")) return "cambridgedesk"
+    if (id.includes("pharmacy")) return "pharmacy-erp"
+    if (id.includes("industrial")) return "industrial-erp"
+    if (id.includes("qistmarket")) return "qistmarket-erp"
+    return undefined
+  }, [productSlug, slot.id])
+
+  const resolvedSlotNumber = useMemo(() => {
+    if (slotNumber) return slotNumber
+    const num = parseInt(slot.slotNumber, 10)
+    if (num >= 1 && num <= 4) return num as 1 | 2 | 3 | 4
+    return 1
+  }, [slotNumber, slot.slotNumber])
+
+  // Subscribe to live CMS store updates
+  const [cmsOverride, setCmsOverride] = useState<string | undefined>(() => {
+    if (!resolvedSlug) return undefined
+    const p = adminCmsStore.getProductBySlug(resolvedSlug)
+    const match = p?.screenshots?.find(
+      (s: CMSProductScreenshot) => s.slotNumber === resolvedSlotNumber,
+    )
+    return match?.image
+  })
+
+  useEffect(() => {
+    if (!resolvedSlug) return
+    const update = () => {
+      const p = adminCmsStore.getProductBySlug(resolvedSlug)
+      const match = p?.screenshots?.find(
+        (s: CMSProductScreenshot) => s.slotNumber === resolvedSlotNumber,
+      )
+      setCmsOverride(match?.image)
+      setImageError(false)
+    }
+    return adminCmsStore.subscribe(update)
+  }, [resolvedSlug, resolvedSlotNumber])
+
+  const activeSrc = cmsOverride || slot.src
+  const isCmsConfigured = Boolean(cmsOverride && cmsOverride !== slot.src)
   const isHero = variant === "hero"
 
   return (
@@ -67,9 +118,22 @@ export default function ProductScreenshotFrame({
 
             {/* Admin Placeholder Slot Badge */}
             <div className="flex items-center gap-1.5">
-              <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#0B5FFF]/20 text-[#00D4FF] border border-[#0B5FFF]/40 flex items-center gap-1">
-                <ImageIcon className="w-3 h-3" />
-                <span>SLOT {slot.slotNumber} • ADMIN PLACEHOLDER</span>
+              <span
+                className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold border flex items-center gap-1 ${
+                  isCmsConfigured
+                    ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/40"
+                    : "bg-[#0B5FFF]/20 text-[#00D4FF] border-[#0B5FFF]/40"
+                }`}
+              >
+                {isCmsConfigured ? (
+                  <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                ) : (
+                  <ImageIcon className="w-3 h-3" />
+                )}
+                <span>
+                  SLOT {slot.slotNumber} •{" "}
+                  {isCmsConfigured ? "ADMIN CONFIGURED" : "ADMIN PLACEHOLDER"}
+                </span>
               </span>
               <span className="text-[11px] font-mono text-slate-300 hidden md:inline truncate max-w-[220px]">
                 {slot.slotLabel}
@@ -148,7 +212,7 @@ export default function ProductScreenshotFrame({
             <div className="text-[11px] font-mono text-slate-400">
               Path:{" "}
               <code className="text-[#00D4FF] bg-slate-900 px-1.5 py-0.5 rounded">
-                {slot.src || `/public/images/products/${slot.id}.png`}
+                {activeSrc || `/public/images/products/${slot.id}.png`}
               </code>
             </div>
           </div>
@@ -156,13 +220,13 @@ export default function ProductScreenshotFrame({
 
         {/* Main Screenshot Container */}
         <div className="relative overflow-hidden bg-[#0A0F1E]">
-          {slot.src && !imageError ? (
+          {activeSrc && !imageError ? (
             <div
               className="relative group/img overflow-hidden cursor-pointer"
               onClick={() => setIsZoomOpen(true)}
             >
               <img
-                src={slot.src}
+                src={activeSrc}
                 alt={slot.altText}
                 onError={() => setImageError(true)}
                 className="w-full h-auto object-cover object-top transition-transform duration-500 group-hover/img:scale-[1.01]"
@@ -274,9 +338,9 @@ export default function ProductScreenshotFrame({
             className="w-full max-w-6xl max-h-[82vh] overflow-auto bg-[#0d1428] border-x border-b border-slate-800 rounded-b-2xl p-4 sm:p-6 flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
-            {slot.src && !imageError ? (
+            {activeSrc && !imageError ? (
               <img
-                src={slot.src}
+                src={activeSrc}
                 alt={slot.altText}
                 className="max-h-[75vh] w-auto object-contain rounded-lg shadow-2xl border border-slate-800"
               />

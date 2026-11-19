@@ -1,32 +1,18 @@
 /* eslint-disable */
 
-// @ts-nocheck
-
-import React, { useState } from "react"
+import { useState } from "react"
 
 import { useNavigate } from "react-router-dom"
 
 import {
-  Cloud,
-  ChevronDown,
-  Menu,
-  ChevronRight,
-  Server,
-  Shield,
-  Zap,
   Globe,
-  Terminal,
-  Briefcase,
   ArrowRight,
   CheckCircle2,
-  Lock,
-  Cpu,
   Database,
   LifeBuoy,
   RefreshCw,
   Plus,
   Minus,
-  Layers,
   X,
   Info,
 } from "lucide-react"
@@ -35,8 +21,6 @@ import {
 
 const PricingPage = () => {
   const navigate = useNavigate()
-
-  const setPage = (p: string) => navigate(p === "home" ? "/" : "/" + p)
 
   const [currency, setCurrency] = useState<"USD" | "PKR">("USD")
 

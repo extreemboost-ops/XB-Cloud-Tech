@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useSearchParams, Link } from "react-router-dom"
+import { adminCmsStore } from "../services/adminCmsStore"
 import {
   Cloud,
   CheckCircle2,
@@ -59,6 +60,26 @@ export default function CampaignLandingTemplate({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    adminCmsStore.addSubmission(
+      `form_lp_${campaign.slug}`,
+      `Paid Ad Campaign Lead (${campaign.name})`,
+      {
+        campaignSlug: campaign.slug,
+        name: formData.name,
+        phone: formData.phone,
+        businessName: formData.businessName,
+        businessType: formData.businessType,
+        requirement: formData.requirement,
+        utm_source: formData.utm_source,
+        utm_medium: formData.utm_medium,
+        utm_campaign: formData.utm_campaign,
+        utm_content: formData.utm_content,
+        utm_term: formData.utm_term,
+        gclid: formData.gclid,
+        fbclid: formData.fbclid,
+      },
+      `/lp/${campaign.slug}`,
+    )
     setFormSubmitted(true)
     setTimeout(() => {
       setFormSubmitted(false)

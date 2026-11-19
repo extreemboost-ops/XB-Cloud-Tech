@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react"
 import { NavLink, Link, useNavigate, useLocation } from "react-router-dom"
+import { adminCmsStore } from "../services/adminCmsStore"
 import {
   Cloud,
   ChevronDown,
@@ -191,6 +192,18 @@ export default function Header() {
 
   const handleDemoSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    adminCmsStore.addSubmission(
+      "form_header_demo",
+      `Book a Demo (${demoProduct})`,
+      {
+        product: demoProduct,
+        name: demoFormData.name,
+        email: demoFormData.email,
+        phone: demoFormData.phone,
+        note: demoFormData.note,
+      },
+      location.pathname,
+    )
     setDemoFormSubmitted(true)
     setTimeout(() => {
       setDemoFormSubmitted(false)

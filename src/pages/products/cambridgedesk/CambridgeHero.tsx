@@ -153,6 +153,8 @@ export default function CambridgeHero() {
 
               <ProductScreenshotFrame
                 slot={heroSlot}
+                productSlug="cambridgedesk"
+                slotNumber={1}
                 variant="hero"
                 fallbackUI={
                   <div className="p-4 sm:p-5 space-y-4">

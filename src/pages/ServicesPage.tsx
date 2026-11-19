@@ -1,16 +1,11 @@
 /* eslint-disable */
 
-// @ts-nocheck
-
-import React, { useState, useRef } from "react"
+import { useState } from "react"
 
 import {
   Cloud,
-  Menu,
   ChevronRight,
   Globe,
-  Terminal,
-  Briefcase,
   ArrowRight,
   Shield,
   Server,
@@ -26,10 +21,8 @@ import {
   Cpu,
   MonitorSmartphone,
   Layers,
-  CheckCircle2,
   Star,
   Users,
-  Award,
   Lock,
   BarChart3,
   Workflow,
@@ -53,7 +46,6 @@ import {
   AlertTriangle,
   KeyRound,
   HardDrive,
-  LineChart,
   Boxes,
   PenTool,
   Pen,
@@ -62,17 +54,12 @@ import {
   Lightbulb,
   GanttChart,
   PhoneCall,
-  X,
   Play,
-  ChevronLeft,
   ExternalLink,
   Quote,
-  Clock,
   CheckCheck,
   Rocket,
-  Target,
   HeartHandshake,
-  Milestone,
 } from "lucide-react"
 
 import { useNavigate } from "react-router-dom"
