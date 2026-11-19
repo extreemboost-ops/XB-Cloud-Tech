@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { adminCmsStore } from "../../services/adminCmsStore"
+import { uploadToCloudinary } from "../../services/cloudinaryService"
 import { useAdminAuth } from "../../context/AdminAuthContext"
 import { MediaAsset } from "../../types/adminCms"
 import {
@@ -28,6 +29,38 @@ export const AdminMediaPage: React.FC = () => {
   const [newAlt, setNewAlt] = useState("")
   const [newFolder, setNewFolder] = useState("products")
   const [newDimensions, setNewDimensions] = useState("1920 × 1080")
+  const [isUploading, setIsUploading] = useState(false)
+
+  const handleDirectUpload = async (file: File) => {
+    if (!file) return
+    setIsUploading(true)
+    setFeedback("Uploading to Cloudinary CDN...")
+    try {
+      const res = await uploadToCloudinary(file, `xb_cloud_tech/${newFolder}`)
+      setNewUrl(res.secure_url)
+      setNewName(file.name.replace(/\.[^/.]+$/, ""))
+      setNewAlt(file.name.replace(/\.[^/.]+$/, ""))
+      if (res.width && res.height) {
+        setNewDimensions(`${res.width} × ${res.height}`)
+      }
+      setFeedback("Uploaded to Cloudinary! Click Save below.")
+    } catch (err: any) {
+      console.warn("Direct upload error:", err)
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const dataUrl = e.target?.result as string
+        if (dataUrl) {
+          setNewUrl(dataUrl)
+          setNewName(file.name)
+          setFeedback("Loaded local file data.")
+        }
+      }
+      reader.readAsDataURL(file)
+    } finally {
+      setIsUploading(false)
+      setTimeout(() => setFeedback(null), 4000)
+    }
+  }
 
   useEffect(() => {
     return adminCmsStore.subscribe(() => {
@@ -279,9 +312,37 @@ export const AdminMediaPage: React.FC = () => {
                 />
               </div>
 
+              {/* Direct File Upload to Cloudinary */}
+              <div className="p-3 bg-blue-50/70 border border-blue-200 rounded-xl space-y-2">
+                <span className="text-[11px] font-bold text-blue-900 block">
+                  Upload Directly to Cloudinary CDN
+                </span>
+                <label className="inline-flex items-center gap-1.5 px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold cursor-pointer shadow-sm transition-all w-full justify-center">
+                  <Upload className="w-4 h-4" />
+                  <span>
+                    {isUploading
+                      ? "Uploading to Cloudinary..."
+                      : "Choose Image File from Computer"}
+                  </span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    disabled={isUploading}
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0]
+                      if (file) handleDirectUpload(file)
+                    }}
+                  />
+                </label>
+                <span className="text-[10px] text-blue-600/80 block text-center font-mono">
+                  Cloud: hdtlfkxg • Auto WebP & CDN Optimization
+                </span>
+              </div>
+
               <div>
                 <label className="block font-semibold text-slate-700 mb-1">
-                  Asset URL / Relative Path
+                  Asset URL / Cloudinary CDN Path
                 </label>
                 <input
                   type="text"

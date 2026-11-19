@@ -51,6 +51,27 @@ export function resolveSEOMetadata(pathname: string): PageSEOMetadata {
       ? pathname.slice(0, -1)
       : pathname
 
+  // Admin control portal & login - strictly noindex, nofollow per Google guidelines
+  if (normalizedPath === "/admin" || normalizedPath.startsWith("/admin/")) {
+    return {
+      title: "XB Cloud Tech Admin Control Portal",
+      description:
+        "Authorized administrator and staff enterprise management portal.",
+      canonicalUrl: `${BASE_URL}/admin`,
+      noIndex: true,
+    }
+  }
+
+  // Preview routes - noindex
+  if (normalizedPath === "/preview" || normalizedPath.startsWith("/preview/")) {
+    return {
+      title: "Page Preview | XB Cloud Tech",
+      description: "XB Cloud Tech preview workspace.",
+      canonicalUrl: BASE_URL,
+      noIndex: true,
+    }
+  }
+
   // 1. Direct registry hit
   if (SEO_REGISTRY[normalizedPath]) {
     return SEO_REGISTRY[normalizedPath]

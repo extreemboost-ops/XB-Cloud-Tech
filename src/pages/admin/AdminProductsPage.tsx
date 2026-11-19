@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { adminCmsStore } from "../../services/adminCmsStore"
+import { uploadToCloudinary } from "../../services/cloudinaryService"
 import { useAdminAuth } from "../../context/AdminAuthContext"
 import { CMSProduct, CMSProductScreenshot } from "../../types/adminCms"
 import {
@@ -10,6 +11,9 @@ import {
   Image,
   Layers,
   Sparkles,
+  Upload,
+  RotateCcw,
+  Loader2,
 } from "lucide-react"
 
 export const AdminProductsPage: React.FC = () => {
@@ -58,6 +62,60 @@ export const AdminProductsPage: React.FC = () => {
     const updatedScreenshots = [...activeProduct.screenshots]
     updatedScreenshots[index] = { ...updatedScreenshots[index], ...updates }
     handleUpdateActiveProduct({ screenshots: updatedScreenshots })
+  }
+
+  const [uploadingSlot, setUploadingSlot] = useState<number | null>(null)
+
+  // Handle direct file upload for a screenshot slot via Cloudinary CDN
+  const handleFileUploadForSlot = async (index: number, file: File) => {
+    if (!file || !activeProduct || !user) return
+
+    setUploadingSlot(index)
+    setFeedback(`Uploading Slot 0${index + 1} to Cloudinary CDN...`)
+
+    try {
+      const res = await uploadToCloudinary(
+        file,
+        `xb_cloud_tech/products/${activeProduct.slug}`,
+      )
+      const cdnUrl = res.secure_url
+
+      // Update screenshot slot with permanent Cloudinary CDN URL
+      handleUpdateScreenshot(index, { image: cdnUrl })
+
+      // Automatically catalog asset into Media Assets Library
+      adminCmsStore.addMediaAsset(
+        {
+          name: `${activeProduct.name} - Slot 0${index + 1} (${file.name})`,
+          url: cdnUrl,
+          type: file.type.startsWith("image/svg") ? "svg" : "image",
+          sizeBytes: res.bytes || file.size,
+          dimensions:
+            res.width && res.height
+              ? { width: res.width, height: res.height }
+              : { width: 1920, height: 1080 },
+          altText: `${activeProduct.name} screenshot slot 0${index + 1}`,
+          folder: "products",
+        },
+        user,
+      )
+
+      setFeedback(`Slot 0${index + 1} uploaded to Cloudinary CDN & saved!`)
+    } catch (err: any) {
+      console.warn("Cloudinary upload fallback to dataURL:", err)
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const dataUrl = e.target?.result as string
+        if (dataUrl) {
+          handleUpdateScreenshot(index, { image: dataUrl })
+          setFeedback(`Slot 0${index + 1} screenshot applied!`)
+        }
+      }
+      reader.readAsDataURL(file)
+    } finally {
+      setUploadingSlot(null)
+      setTimeout(() => setFeedback(null), 4000)
+    }
   }
 
   return (
@@ -252,10 +310,100 @@ export const AdminProductsPage: React.FC = () => {
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {/* Visual Screenshot Thumbnail Preview */}
+                  <div className="relative aspect-video max-h-48 w-full rounded-xl overflow-hidden bg-slate-900 border border-slate-200 group/thumb">
+                    {slot.image ? (
+                      <img
+                        src={slot.image}
+                        alt={slot.title}
+                        className="w-full h-full object-cover object-top"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex flex-col items-center justify-center text-slate-400 text-xs">
+                        <Image className="w-6 h-6 mb-1 opacity-50" />
+                        <span>No image assigned</span>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/thumb:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                      <label className="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-semibold text-xs cursor-pointer flex items-center gap-1.5 shadow-md">
+                        {uploadingSlot === sIdx ? (
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        ) : (
+                          <Upload className="w-3.5 h-3.5" />
+                        )}
+                        <span>
+                          {uploadingSlot === sIdx
+                            ? "Uploading..."
+                            : "Replace File"}
+                        </span>
+                        <input
+                          type="file"
+                          accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                          className="hidden"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0]
+                            if (file) handleFileUploadForSlot(sIdx, file)
+                          }}
+                        />
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleUpdateScreenshot(sIdx, {
+                            image: `/images/products/${activeProduct.slug.replace("-erp", "")}-hero.svg`,
+                          })
+                        }
+                        className="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold flex items-center gap-1"
+                        title="Reset to default illustration"
+                      >
+                        <RotateCcw className="w-3.5 h-3.5" />
+                        <span>Reset</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Upload Controls & Inputs */}
+                  <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-slate-200">
+                    <label className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold cursor-pointer transition-colors shadow-sm">
+                      {uploadingSlot === sIdx ? (
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      ) : (
+                        <Upload className="w-3.5 h-3.5" />
+                      )}
+                      <span>
+                        {uploadingSlot === sIdx
+                          ? "Uploading to Cloudinary..."
+                          : "Upload Image From Computer"}
+                      </span>
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0]
+                          if (file) handleFileUploadForSlot(sIdx, file)
+                        }}
+                      />
+                    </label>
+
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleUpdateScreenshot(sIdx, {
+                          image: `/images/products/${activeProduct.slug.replace("-erp", "")}-hero.svg`,
+                        })
+                      }
+                      className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-white border border-slate-200 hover:bg-slate-100 text-slate-600 rounded-lg text-xs font-medium cursor-pointer"
+                    >
+                      <RotateCcw className="w-3 h-3 text-slate-400" />
+                      <span>Reset to Default</span>
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                     <div>
                       <label className="block text-[11px] font-semibold text-slate-600 mb-1">
-                        Slot Title
+                        Slot Label / Title
                       </label>
                       <input
                         type="text"
@@ -271,7 +419,7 @@ export const AdminProductsPage: React.FC = () => {
 
                     <div>
                       <label className="block text-[11px] font-semibold text-slate-600 mb-1">
-                        Image Asset Path
+                        Image URL / Data Path
                       </label>
                       <input
                         type="text"
@@ -281,13 +429,14 @@ export const AdminProductsPage: React.FC = () => {
                             image: e.target.value,
                           })
                         }
+                        placeholder="/images/products/..."
                         className="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg font-mono text-slate-600"
                       />
                     </div>
 
                     <div className="sm:col-span-2">
                       <label className="block text-[11px] font-semibold text-slate-600 mb-1">
-                        Caption / Operational Shift
+                        Caption / Operational Description
                       </label>
                       <input
                         type="text"
